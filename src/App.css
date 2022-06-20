@@ -1,0 +1,75 @@
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.userName {
+  padding: 0px !important;
+}
+.userName span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 150px;
+  display: block;
+  font-size: 11px;
+}
+.nav-link {
+  font-size: 13.5px !important
+  ;
+}
+.App-link {
+  color: #61dafb;
+}
+.carousel-button-group img {
+  position: absolute;
+  width: 24px;
+  cursor: pointer;
+  top: 40%;
+}
+.carousel-button-group-left-image {
+  left: 0;
+}
+.carousel-button-group-right-image {
+  right: 0;
+}
+.fileslisting {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+}
+.fileslisting li {
+  background: #e4ebf8;
+  padding: 10px 20px;
+  margin: 5px 0;
+  width: 45%;
+  margin: 3px 2.5%;
+  display: inline-block;
+}
+.fileslisting li i {
+  float: right;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
