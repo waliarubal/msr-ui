@@ -22,6 +22,7 @@ import JobDetail from "./components/viewhistory/jobDetail";
 import RequestFiles from "./components/admin/requestFiles";
 import MyDrafts from "./components/admin/myDrafts";
 import "./App.css";
+import EditEngineeringRequestForm from "./components/admin/EditEngineeringRequestForm";
 
 class App extends Component {
   state = {
@@ -52,6 +53,10 @@ class App extends Component {
             <ProtectedRoute path="/myjobs" component={MyJobs} />
             <ProtectedRoute path="/myDrafts" component={MyDrafts} />
             <ProtectedRoute path="/admin/newincident" component={NewIncident} />
+            <ProtectedRoute
+              path="/admin/engineering-request-form"
+              component={EditEngineeringRequestForm}
+            />
             <ProtectedRoute
               path="/admin/viewIncident/:id"
               component={ViewIncident}

@@ -1459,3 +1459,305 @@ footer {
 .privacy-section .table-responsive.tour-table td:first-child {
   width: 5%;
 }
+.Request-form h4#myModalLabel2 {
+   border-bottom: 1px solid #21252938;
+    margin-bottom: 15px;
+    width: 100% !important;
+}
+div#myRadioGroup label {
+    margin-right: 15px;
+    margin-bottom: 0;
+    
+}
+
+.modal.Request-form .button {
+    margin: 50px 0 15px;
+}
+.modal.Request-form button.btn.btn-primary.save.save-draft:hover {
+    background-color: #00204f !important;
+    color: #fff !important;
+    border-color: #00204f !important;
+}
+.custom-file.link-file label.custom-file-label::after {
+content:"Add Link"
+}
+div#myRadioGroup .desc {
+    background: #f7f8fa;
+    padding: 20px;
+    border-radius: 0.25rem;
+    border: 2px solid #f0f0f0;
+    margin-top: 15px;
+}
+ 
+div#myRadioGroup .desc p {
+    margin-bottom: 5px;
+}
+.Request-form div#myRadioGroup input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    
+}
+.modal-content .form-group.big-textarea {
+    margin-bottom: 50px;
+}
+.Request-form h5 {
+    margin-bottom: 30px;
+}
+.Request-form h5 span {
+    font-size: 14px;
+    color: #888;
+    font-style: italic;
+}
+.Request-form .form-check-inline {
+    width: 24%;
+    margin: 0 0 20px!important;
+}
+.Request-form .form-group label {
+    margin-top: 8px;
+    margin-bottom: 0;
+    float: left;
+    width: 100%;
+}
+.Request-form .model-form {
+    float: left;
+    width: 100%;
+}
+.modal-content .form-group {
+    margin-bottom: 15px;
+}
+.Request-form p {
+    float: left;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.Request-form span.required {
+    color: red;
+}
+.Request-form .file {
+    border: 1px solid #a9a9a9 !important;
+    padding: 0;
+    border-radius: 0.25rem;
+}
+
+.Request-form input[type="submit"] {
+    float: right;
+    background: #e9ecef;
+    border: none;
+    color: #495057;
+    padding: 0.375rem 0.75rem;
+    height: calc(1.5em + 0.75rem);
+    border-radius: 0 0.25rem 0.25rem 0;
+    border-left: inherit;
+}
+.Request-form .form-check-label {
+    margin-bottom: 0;
+    line-height: 20px;
+}
+.edit-request-form .table .thead-light th {
+    color: #495057;
+    background-color: #dceaf7;
+     border-left: 1px solid #cdcdcd;
+    text-align: left;
+}
+.edit-request-form .table td,  .edit-request-form .table th {
+    height: 40px;
+    border-left: 1px solid #cdcdcd;
+}
+.edit-request-form table.table.table-striped {
+    border-bottom: 1px solid #cdcdcd;
+    border-right: 1px solid #cdcdcd;
+	margin-bottom:0;
+}
+.edit-request-form {
+    padding: 50px 0;
+}
+.edit-request-form .accordion>.card {
+  
+    margin-bottom: 58px;
+}
+.edit-request-form select.form-control {
+    height: 35px;
+    width: 200px;
+}
+.Request-form .form-check-inline .form-check-input {
+      float: left;
+    width: 15px;
+    height: 15px;
+	margin-top: 2px;
+}
+.edit-request-form h5 {
+    margin-bottom: 30px;
+    color: #4280a7;
+    font-size: 24px;
+}
+.edit-request-form .button {
+    position: relative;
+    top: 25%;
+   width: 50px;
+    height: 23px;
+       display: inline-block;
+    overflow: hidden;
+}
+.Request-form h4#myModalLabel2 span {
+    float: right;
+    font-size: 14px;
+    text-transform: capitalize;
+    margin-top: 50px;
+    color:#888;
+}
+.edit-request-form h5 img {
+    width: auto;
+}
+.edit-request-form .checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+#button-1 .knobs, #button-1 .knobs:before, #button-1 .layer {
+    transition: 0.3s ease all;
+}
+.knobs {
+    z-index: 2;
+}
+.button-cover, .knobs, .layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+#button-1 .knobs, #button-1 .knobs:before, #button-1 .layer {
+    transition: 0.3s ease all;
+}
+#button-1 .knobs:before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 28px;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    background-color: #66cc00;
+    border-radius: 50%;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+#button-1 .knobs, #button-1 .knobs:before, #button-1 .layer {
+    transition: 0.3s ease all;
+}
+.edit-request-form .card {
+    
+    border-radius: 0;
+}
+.edit-request-form .card .card-header {
+background-color: #4381b0;
+
+}
+.button.r, .button.r .layer {
+    border-radius: 100px;
+}
+.layer {
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+	box-shadow: 2px 2px 0px 0px #0000002e inset;
+}
+a.add-new:before {
+    position: absolute;
+    content: "+";
+    left: 16px;
+    top: 0;
+    font-weight: bold;
+}
+a.add-new {
+    background: #467fa8;
+    color: #fff;
+    line-height: 34px;
+    float: left;
+    padding: 0 18px 0 29px;
+    position: relative;
+    border-radius: 5px;
+}
+.button-cover, .knobs, .layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+	font-weight: 500;
+}
+.edit-request-form .card .card-body {
+    padding: 0;
+}
+#button-1 .checkbox:checked + .knobs:before {
+    content: '';
+    left: 0;
+    background-color: #b2b4b3;
+}
+.edit-request-form .accordion h2 button.btn.btn-link {
+    width: 100%;
+    float: left;
+	padding: 0;
+    margin: 0;
+    text-align: left; 
+	color: #fff;
+    font-weight: 500;
+	    padding-left: 30px;
+}
+.layer {
+    width: 100%;
+    background-color: #fff;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+#button-1 .checkbox:checked ~ .layer {
+    background-color: #e4e4e4;
+}
+.edit-request-form .table .thead-light th h6 {
+   margin-bottom: 0;
+    line-height: 18px;
+    padding-left: 10px;
+   display: inline-block;
+}
+.edit-request-form .accordion h2 button.btn.btn-link .button {
+    float: right;
+    margin: 0;
+}
+.row {
+ 
+  width: 100%;
+}
+.edit-request-form  button.btn.btn-link.panel-collapse:before {
+    border-top: 0;
+    border-bottom: 8px solid; 
+	  
+    border-right: 8px solid transparent;
+   
+    border-left: 8px solid transparent;
+    position: absolute;
+    content: "";
+    left: 18px;
+    top: 22px;
+	
+}
+.edit-request-form button.btn.btn-link.collapsed.panel-collapse:before {
+  border-top: 8px solid;   
+ border-bottom: 0;
+}
+.edit-request-form .accordion h2 button.btn.btn-link:hover {
+    text-decoration: none;
+}
+a.add-new:hover {
+    text-decoration: none;
+    color: #fff !important;
+}
