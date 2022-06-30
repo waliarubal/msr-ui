@@ -1,8 +1,43 @@
 import React from "react";
+import axios from "axios";
+import { services } from "../common/constant";
 
 export default class EditEngineeringRequestForm extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      requestList: [],
+    };
+  }
+
+  getToken() {
+    return sessionStorage.getItem("authToken");
+  }
+
+  componentDidMount() {
+    let requests = [];
+    axios
+      .get(
+        `${services.baseUrl}${services.reqList}?authToken=${this.getToken()}`
+      )
+      .then((response) => {
+        requests = response.data.data;
+        requests.forEach((request) => {
+          axios
+            .post(
+              `${services.baseUrl}${
+                services.categoryList
+              }?authToken=${this.getToken()}`,
+              { _id: request._id }
+            )
+            .then((response) => (request.categories = response.data.data));
+        });
+
+        this.setState({
+          requestList: requests,
+        });
+      });
   }
 
   render() {
@@ -15,97 +50,99 @@ export default class EditEngineeringRequestForm extends React.Component {
               Edit Engineering Requst Form
             </h5>
             <div class="accordion" id="accordionExample">
-              <div class="card">
-                <div class="card-header" id="headingTwo">
-                  <h2 class="mb-0">
-                    <button
-                      class="btn btn-link  panel-collapse"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="collapseTwo"
-                    >
-                      Project Scope{" "}
-                      <div class="button r" id="button-1">
-                        <input type="checkbox" class="checkbox" />
-                        <div class="knobs"></div>
-                        <div class="layer"></div>
-                      </div>
-                    </button>
-                  </h2>
-                </div>
-                <div
-                  id="collapseTwo"
-                  class="collapse show "
-                  aria-labelledby="headingTwo"
-                  data-parent="#accordionExample"
-                >
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <thead class="thead-light">
-                          <tr>
-                            <th>Field</th>
-                            <th>
-                              <h6>Visible (yes/no)</h6>
-                            </th>
-                            <th>
-                              <h6>Mandotory (yes/no)</h6>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>3D printing</td>
-                            <td>
-                              <div class="button r" id="button-1">
-                                <input type="checkbox" class="checkbox" />
-                                <div class="knobs"></div>
-                                <div class="layer"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="button r" id="button-1">
-                                <input type="checkbox" class="checkbox" />
-                                <div class="knobs"></div>
-                                <div class="layer"></div>
-                              </div>
-                            </td>
-                          </tr>
+              {this.state.requestList.map((request) => (
+                <div class="card">
+                  <div class="card-header" id={request._id}>
+                    <h2 class="mb-0">
+                      <button
+                        class="btn btn-link  panel-collapse"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo"
+                      >
+                        {request.name}
+                        <div class="button r" id="button-1">
+                          <input type="checkbox" class="checkbox" />
+                          <div class="knobs"></div>
+                          <div class="layer"></div>
+                        </div>
+                      </button>
+                    </h2>
+                  </div>
+                  <div
+                    id="collapseTwo"
+                    class="collapse show "
+                    aria-labelledby={request._id}
+                    data-parent="#accordionExample"
+                  >
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Field</th>
+                              <th>
+                                <h6>Visible (yes/no)</h6>
+                              </th>
+                              <th>
+                                <h6>Mandotory (yes/no)</h6>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>3D printing</td>
+                              <td>
+                                <div class="button r" id="button-1">
+                                  <input type="checkbox" class="checkbox" />
+                                  <div class="knobs"></div>
+                                  <div class="layer"></div>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="button r" id="button-1">
+                                  <input type="checkbox" class="checkbox" />
+                                  <div class="knobs"></div>
+                                  <div class="layer"></div>
+                                </div>
+                              </td>
+                            </tr>
 
-                          <tr>
-                            <td>Other, please describe:</td>
-                            <td>
-                              <div class="button r" id="button-1">
-                                <input type="checkbox" class="checkbox" />
-                                <div class="knobs"></div>
-                                <div class="layer"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="button r" id="button-1">
-                                <input type="checkbox" class="checkbox" />
-                                <div class="knobs"></div>
-                                <div class="layer"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <a href="" class="add-new">
-                                Add new
-                              </a>
-                            </td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                        </tbody>
-                      </table>
+                            <tr>
+                              <td>Other, please describe:</td>
+                              <td>
+                                <div class="button r" id="button-1">
+                                  <input type="checkbox" class="checkbox" />
+                                  <div class="knobs"></div>
+                                  <div class="layer"></div>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="button r" id="button-1">
+                                  <input type="checkbox" class="checkbox" />
+                                  <div class="knobs"></div>
+                                  <div class="layer"></div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <a href="" class="add-new">
+                                  Add new
+                                </a>
+                              </td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ))}
 
               {/* <div class="card">
                 <div class="card-header" id="headingThree">
