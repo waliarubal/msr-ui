@@ -2,6 +2,86 @@ import React from "react";
 import axios from "axios";
 import { services } from "../common/constant";
 
+function getToken() {
+  return sessionStorage.getItem("authToken");
+}
+
+class CheckBox extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isChecked: props.isChecked,
+    };
+    this.OnChecked = this.OnChecked.bind(this);
+  }
+
+  OnChecked() {
+    this.setState({
+      isChecked: !this.state.isChecked,
+    });
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <div class="button r" id="button-1">
+          <input
+            type="checkbox"
+            class="checkbox"
+            checked={this.state.isChecked}
+            onChange={this.OnChecked}
+          />
+          <div class="knobs"></div>
+          <div class="layer"></div>
+        </div>
+      </React.Fragment>
+    );
+  }
+}
+
+class EngineeringRequestFields extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      request: props.request,
+      categories: [],
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .post(
+        `${services.baseUrl}${services.categoryList}?authToken=${getToken()}`,
+        { _id: this.props.request._id }
+      )
+      .then((response) =>
+        this.setState({
+          categories: response.data.data,
+        })
+      );
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        {this.state.categories.map((category) => (
+          <tr key={category.categoryId}>
+            <td>{category.categoryName}</td>
+            <td>
+              <CheckBox isChecked={category.isActive} />
+            </td>
+            <td>
+              <CheckBox isChecked={category.isActive} />
+            </td>
+          </tr>
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
 export default class EditEngineeringRequestForm extends React.Component {
   constructor(props) {
     super(props);
@@ -11,29 +91,12 @@ export default class EditEngineeringRequestForm extends React.Component {
     };
   }
 
-  getToken() {
-    return sessionStorage.getItem("authToken");
-  }
-
   componentDidMount() {
     let requests = [];
     axios
-      .get(
-        `${services.baseUrl}${services.reqList}?authToken=${this.getToken()}`
-      )
+      .get(`${services.baseUrl}${services.reqList}?authToken=${getToken()}`)
       .then((response) => {
         requests = response.data.data;
-        requests.forEach((request) => {
-          axios
-            .post(
-              `${services.baseUrl}${
-                services.categoryList
-              }?authToken=${this.getToken()}`,
-              { _id: request._id }
-            )
-            .then((response) => (request.categories = response.data.data));
-        });
-
         this.setState({
           requestList: requests,
         });
@@ -51,7 +114,7 @@ export default class EditEngineeringRequestForm extends React.Component {
             </h5>
             <div class="accordion" id="accordionExample">
               {this.state.requestList.map((request) => (
-                <div class="card">
+                <div class="card" key={request._id}>
                   <div class="card-header" id={request._id}>
                     <h2 class="mb-0">
                       <button
@@ -92,25 +155,9 @@ export default class EditEngineeringRequestForm extends React.Component {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>3D printing</td>
-                              <td>
-                                <div class="button r" id="button-1">
-                                  <input type="checkbox" class="checkbox" />
-                                  <div class="knobs"></div>
-                                  <div class="layer"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="button r" id="button-1">
-                                  <input type="checkbox" class="checkbox" />
-                                  <div class="knobs"></div>
-                                  <div class="layer"></div>
-                                </div>
-                              </td>
-                            </tr>
+                            <EngineeringRequestFields request={request} />
 
-                            <tr>
+                            {/* <tr>
                               <td>Other, please describe:</td>
                               <td>
                                 <div class="button r" id="button-1">
@@ -126,7 +173,7 @@ export default class EditEngineeringRequestForm extends React.Component {
                                   <div class="layer"></div>
                                 </div>
                               </td>
-                            </tr>
+                            </tr> */}
                             <tr>
                               <td>
                                 <a href="" class="add-new">
