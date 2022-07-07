@@ -1,44 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { services } from "../common/constant";
-
-function getToken() {
-  return sessionStorage.getItem("authToken");
-}
-
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isChecked: props.isChecked,
-    };
-    this.OnChecked = this.OnChecked.bind(this);
-  }
-
-  OnChecked() {
-    this.setState({
-      isChecked: !this.state.isChecked,
-    });
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <div class="button r" id="button-1">
-          <input
-            type="checkbox"
-            class="checkbox"
-            checked={this.state.isChecked}
-            onChange={this.OnChecked}
-          />
-          <div class="knobs"></div>
-          <div class="layer"></div>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+import { getToken } from "../common/helpers";
+import { CheckBox } from "../common/CheckBox";
 
 class EngineeringRequestFields extends React.Component {
   constructor(props) {
@@ -46,21 +10,80 @@ class EngineeringRequestFields extends React.Component {
 
     this.state = {
       request: props.request,
+      categoryName: "",
       categories: [],
     };
+    this.onInputChanged = this.onInputChanged.bind(this);
+    this.createCategory = this.createCategory.bind(this);
   }
 
   componentDidMount() {
+    this.loadCategories();
+  }
+
+  loadCategories() {
     axios
       .post(
         `${services.baseUrl}${services.categoryList}?authToken=${getToken()}`,
         { _id: this.props.request._id }
       )
-      .then((response) =>
+      .then((response) => {
         this.setState({
           categories: response.data.data,
-        })
-      );
+        });
+      });
+  }
+
+  updateCategory(category) {
+    axios.put(
+      `${services.baseUrl}${services.categoryUpdate}?authToken=${getToken()}`,
+      category
+    );
+  }
+
+  createCategory(event) {
+    event.preventDefault();
+    if (!this.state.categoryName) {
+      alert('Please enter new category name.');
+      return;
+    } 
+
+    let categoryName = this.state.categoryName;
+    this.setState({ categoryName: '' });
+
+    axios
+      .post(
+        `${services.baseUrl}${services.categoryCreate}?authToken=${getToken()}`,
+        {
+          name: categoryName,
+          isActive: true,
+          isRequired: false,
+        }
+      )
+      .then((response) => {
+        let categoryId = response.data.data._id;
+        let requestId = this.state.request._id;
+        axios
+          .post(
+            `${services.baseUrl}${
+              services.mapRequestCategory
+            }?authToken=${getToken()}`,
+            {
+              requestTypeId: requestId,
+              categoryId: categoryId,
+            }
+          )
+          .then(() => this.loadCategories());
+      });
+  }
+
+  onInputChanged(event) {
+    let target = event.target;
+    let name = target.name;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
   }
 
   render() {
@@ -70,13 +93,51 @@ class EngineeringRequestFields extends React.Component {
           <tr key={category.categoryId}>
             <td>{category.categoryName}</td>
             <td>
-              <CheckBox isChecked={category.isActive} />
+              <CheckBox
+                isChecked={category.isActive}
+                CheckChanged={(isChecked) => {
+                  category.isActive = isChecked;
+                  this.updateCategory(category);
+                }}
+              />
             </td>
             <td>
-              <CheckBox isChecked={category.isActive} />
+              <CheckBox
+                isChecked={category.isRequired}
+                CheckChanged={(isChecked) => {
+                  category.isRequired = isChecked;
+                  this.updateCategory(category);
+                }}
+              />
             </td>
           </tr>
         ))}
+        <tr>
+          <td>
+            <div class="form-group">
+              <div className="row">
+                <div className="col">
+                  <input
+                    type="text"
+                    value={this.state.categoryName}
+                    onChange={this.onInputChanged}
+                    placeholder="Enter new category name."
+                    class="form-control"
+                    name="categoryName"
+                    required
+                  />
+                </div>
+                <div className="col-auto">
+                  <a href="#" class="add-new" onClick={this.createCategory}>
+                    Add new
+                  </a>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
       </React.Fragment>
     );
   }
@@ -92,13 +153,11 @@ export default class EditEngineeringRequestForm extends React.Component {
   }
 
   componentDidMount() {
-    let requests = [];
     axios
       .get(`${services.baseUrl}${services.reqList}?authToken=${getToken()}`)
       .then((response) => {
-        requests = response.data.data;
         this.setState({
-          requestList: requests,
+          requestList: response.data.data,
         });
       });
   }
@@ -156,15 +215,6 @@ export default class EditEngineeringRequestForm extends React.Component {
                           </thead>
                           <tbody>
                             <EngineeringRequestFields request={request} />
-                            <tr>
-                              <td>
-                                <a href="" class="add-new">
-                                  Add new
-                                </a>
-                              </td>
-                              <td></td>
-                              <td></td>
-                            </tr>
                           </tbody>
                         </table>
                       </div>
