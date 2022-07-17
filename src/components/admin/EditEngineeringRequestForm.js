@@ -13,15 +13,15 @@ class EngineeringRequestFields extends React.Component {
       categoryName: "",
       categories: [],
     };
-    this.onInputChanged = this.onInputChanged.bind(this);
-    this.createCategory = this.createCategory.bind(this);
+    this.OnInputChanged = this.OnInputChanged.bind(this);
+    this.CreateCategory = this.CreateCategory.bind(this);
   }
 
   componentDidMount() {
-    this.loadCategories();
+    this.LoadCategories();
   }
 
-  loadCategories() {
+  LoadCategories() {
     axios
       .post(
         `${services.baseUrl}${services.categoryList}?authToken=${getToken()}`,
@@ -34,14 +34,14 @@ class EngineeringRequestFields extends React.Component {
       });
   }
 
-  updateCategory(category) {
+  UpdateCategory(category) {
     axios.put(
       `${services.baseUrl}${services.categoryUpdate}?authToken=${getToken()}`,
       category
     );
   }
 
-  createCategory(event) {
+  CreateCategory(event) {
     event.preventDefault();
     if (!this.state.categoryName) {
       alert('Please enter new category name.');
@@ -73,11 +73,11 @@ class EngineeringRequestFields extends React.Component {
               categoryId: categoryId,
             }
           )
-          .then(() => this.loadCategories());
+          .then(() => this.LoadCategories());
       });
   }
 
-  onInputChanged(event) {
+  OnInputChanged(event) {
     let target = event.target;
     let name = target.name;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -97,7 +97,7 @@ class EngineeringRequestFields extends React.Component {
                 isChecked={category.isActive}
                 CheckChanged={(isChecked) => {
                   category.isActive = isChecked;
-                  this.updateCategory(category);
+                  this.UpdateCategory(category);
                 }}
               />
             </td>
@@ -106,7 +106,7 @@ class EngineeringRequestFields extends React.Component {
                 isChecked={category.isRequired}
                 CheckChanged={(isChecked) => {
                   category.isRequired = isChecked;
-                  this.updateCategory(category);
+                  this.UpdateCategory(category);
                 }}
               />
             </td>
@@ -120,7 +120,7 @@ class EngineeringRequestFields extends React.Component {
                   <input
                     type="text"
                     value={this.state.categoryName}
-                    onChange={this.onInputChanged}
+                    onChange={this.OnInputChanged}
                     placeholder="Enter new category name."
                     class="form-control"
                     name="categoryName"
@@ -128,7 +128,7 @@ class EngineeringRequestFields extends React.Component {
                   />
                 </div>
                 <div className="col-auto">
-                  <a href="#" class="add-new" onClick={this.createCategory}>
+                  <a href="#" class="add-new" onClick={this.CreateCategory}>
                     Add new
                   </a>
                 </div>

@@ -30,10 +30,21 @@ export default class AdminHome extends React.Component {
               <div class="work-section-inner">
                 <h2>Requests </h2>
                 <div class="row justify-content-md-center">
-                  <div class="col-lg-3 col-md-6 col-sm-12">
+                  {/* <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="work-col">
                       <h3>Requests </h3>
                       <Link to="/reqList" class="create-button btn-demo">
+                        OLD
+                      </Link>
+                    </div>
+                  </div> */}
+                  <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="work-col">
+                      <h3>Requests </h3>
+                      <Link
+                        to="/engineering-requests"
+                        class="create-button btn-demo"
+                      >
                         REQUEST QUEUE
                       </Link>
                     </div>
@@ -61,7 +72,10 @@ export default class AdminHome extends React.Component {
                   <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="work-col">
                       <h3>Request Form </h3>
-                      <Link to="/admin/engineering-request-form" class="create-button btn-demo">
+                      <Link
+                        to="/admin/engineering-request-form"
+                        class="create-button btn-demo"
+                      >
                         EDIT
                       </Link>
                     </div>

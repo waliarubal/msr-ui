@@ -23,6 +23,8 @@ import RequestFiles from "./components/admin/requestFiles";
 import MyDrafts from "./components/admin/myDrafts";
 import "./App.css";
 import EditEngineeringRequestForm from "./components/admin/EditEngineeringRequestForm";
+import EngineeringRequests from "./components/admin/EngineeringRequests";
+import EngineeringRequest from "./components/admin/EngineeringRequest";
 
 class App extends Component {
   state = {
@@ -53,6 +55,8 @@ class App extends Component {
             <ProtectedRoute path="/myjobs" component={MyJobs} />
             <ProtectedRoute path="/myDrafts" component={MyDrafts} />
             <ProtectedRoute path="/admin/newincident" component={NewIncident} />
+            <ProtectedRoute path="/engineering-requests" component={EngineeringRequests} />
+            <ProtectedRoute path="/engineering-request/:id" component={EngineeringRequest} />
             <ProtectedRoute
               path="/admin/engineering-request-form"
               component={EditEngineeringRequestForm}
