@@ -26,8 +26,8 @@ export default class WorkSection extends React.Component {
                     <div class="work-col">
                       <h3>Requests </h3>
 
-                      <Link to="/reqList" class="create-button btn-demo">
-                        REQUEST QUEUE{" "}
+                      <Link to="/engineering-requests" class="create-button btn-demo">
+                        REQUEST QUEUE
                       </Link>
                     </div>
                   </div>
