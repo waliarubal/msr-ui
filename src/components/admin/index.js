@@ -30,7 +30,7 @@ export default class AdminHome extends React.Component {
               <div class="work-section-inner">
                 <h2>Requests </h2>
                 <div class="row justify-content-md-center">
-                  {/* <div class="col-lg-3 col-md-6 col-sm-12">
+                  {/* <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <h3>Requests </h3>
                       <Link to="/reqList" class="create-button btn-demo">
@@ -38,7 +38,7 @@ export default class AdminHome extends React.Component {
                       </Link>
                     </div>
                   </div> */}
-                  <div class="col-lg-3 col-md-6 col-sm-12">
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <h3>Requests </h3>
                       <Link
@@ -50,7 +50,7 @@ export default class AdminHome extends React.Component {
                     </div>
                   </div>
 
-                  <div class="col-lg-3 col-md-6 col-sm-12">
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <h3>My Assigned Tasks </h3>
                       <Link to="/myjobs" class="create-button btn-demo">
@@ -58,7 +58,7 @@ export default class AdminHome extends React.Component {
                       </Link>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-12">
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <h3>Create New</h3>
                       <a
@@ -69,7 +69,7 @@ export default class AdminHome extends React.Component {
                       </a>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-12">
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <h3>Request Form </h3>
                       <Link

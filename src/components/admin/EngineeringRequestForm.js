@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { services } from "../common/constant";
 import { getToken, getUserId } from "../common/helpers";
+import DateTimePicker from "react-datetime-picker";
 
 class RequestType extends React.Component {
   constructor(props) {
@@ -48,23 +49,25 @@ class RequestType extends React.Component {
     return (
       <React.Fragment>
         <h5>
-          {this.props.requestType.name} <span>(check all that apply):</span>{" "}
+          {this.props.requestType.name} <span>(check all that apply):</span>
         </h5>
-        {this.state.categories.map((category) => (
-          <div class="form-check-inline" key={category.categoryId}>
-            <label class="form-check-label">
-              <input
-                required={category.isRequired}
-                type="checkbox"
-                class="form-check-input"
-                value={category.isSelected}
-                onChange={(event) => this.OnCheckChange(event, category)}
-              />
-              {category.categoryName}
-            </label>
-            {category.isRequired && <span class="required">*</span>}
-          </div>
-        ))}
+        {this.state.categories
+          .filter((category) => category.isActive)
+          .map((category) => (
+            <div class="form-check-inline" key={category.categoryId}>
+              <label class="form-check-label">
+                <input
+                  required={category.isRequired}
+                  type="checkbox"
+                  class="form-check-input"
+                  value={category.isSelected}
+                  onChange={(event) => this.OnCheckChange(event, category)}
+                />
+                {category.categoryName}
+              </label>
+              {category.isRequired && <span class="required">*</span>}
+            </div>
+          ))}
         <div class="row">
           <div class="form-group col-md-12 big-textarea">
             <textarea
@@ -88,6 +91,7 @@ export default class EngineeringRequestForm extends React.Component {
 
     this.state = {
       shipmentTypes: [],
+      users: [],
       isOpen: props.isOpen,
       shipmentType: "",
       url: "",
@@ -95,14 +99,15 @@ export default class EngineeringRequestForm extends React.Component {
       requestTypes: [],
       shipmentTypeId: "",
       shipmentAddress: "",
-      dueDate: "",
-      requestedBy: "",
+      dueDate: new Date(),
       msftAlias: "",
       requestDescription: "",
-      priority: "high",
+      priority: "normal",
       projectName: "",
       successCriteria: "",
       files: [],
+      isDraft: false,
+      userId: getUserId(),
     };
 
     this.OnInputChange = this.OnInputChange.bind(this);
@@ -110,8 +115,10 @@ export default class EngineeringRequestForm extends React.Component {
     this.OnCategoriesChange = this.OnCategoriesChange.bind(this);
     this.OnShipmentTypeChange = this.OnShipmentTypeChange.bind(this);
     this.OnSubmit = this.OnSubmit.bind(this);
+    this.SaveDraft = this.SaveDraft.bind(this);
     this.AddFile = this.AddFile.bind(this);
     this.DeleteFile = this.DeleteFile.bind(this);
+    this.OnDateChange = this.OnDateChange.bind(this);
   }
 
   CloseDialog() {
@@ -172,6 +179,15 @@ export default class EngineeringRequestForm extends React.Component {
     });
   }
 
+  SaveDraft(event) {
+    event.preventDefault();
+
+    this.setState({
+      isDraft: true,
+    });
+    this.OnSubmit(event);
+  }
+
   OnSubmit(event) {
     event.preventDefault();
 
@@ -198,15 +214,15 @@ export default class EngineeringRequestForm extends React.Component {
           shipmentTypeId: this.state.shipmentTypeId,
           shipmentAddress: this.state.shipmentAddress,
           dueDate: this.state.dueDate,
-          requestBy: this.state.requestedBy,
           msftAlias: this.state.msftAlias,
           requestDescription: this.state.requestDescription,
           priority: this.state.priority,
-          projectName: this.state.projectName,
+          projectName: this.state.projectName || "N/A",
           requestTypes: requestTypes,
           successCriteria: this.state.successCriteria,
           files: this.state.files,
-          userId: getUserId(),
+          userId: this.state.userId,
+          isDraft: this.state.isDraft,
         }
       )
       .then((response) => {
@@ -215,6 +231,13 @@ export default class EngineeringRequestForm extends React.Component {
           this.CloseDialog();
         }
       });
+  }
+
+  OnDateChange(date) {
+    this.setState({
+      dueDate: date,
+    });
+    console.log(date);
   }
 
   Populate() {
@@ -226,15 +249,26 @@ export default class EngineeringRequestForm extends React.Component {
         axios
           .get(
             `${services.baseUrl}${
-              services.shipmentTypesList
+              services.getUsersList
             }?authToken=${getToken()}`
           )
-          .then((response) =>
-            this.setState({
-              requestTypes: requestTypes,
-              shipmentTypes: response.data.data,
-            })
-          );
+          .then((response) => {
+            let users = response.data.data;
+
+            axios
+              .get(
+                `${services.baseUrl}${
+                  services.shipmentTypesList
+                }?authToken=${getToken()}`
+              )
+              .then((response) =>
+                this.setState({
+                  requestTypes: requestTypes,
+                  users: users,
+                  shipmentTypes: response.data.data,
+                })
+              );
+          });
       });
   }
 
@@ -295,15 +329,15 @@ export default class EngineeringRequestForm extends React.Component {
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label>Request Desired Due Date: </label>
+                              <label>Desired Due Date:</label>
                             </div>
                             <div class="col-md-7">
-                              <input
-                                type="date"
-                                class="form-control"
+                              <DateTimePicker
                                 name="dueDate"
                                 value={this.state.dueDate}
-                                onChange={this.OnInputChange}
+                                onChange={(date) =>
+                                  this.setState({ dueDate: date })
+                                }
                               />
                             </div>
                           </div>
@@ -311,7 +345,7 @@ export default class EngineeringRequestForm extends React.Component {
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label class="text-right">Priority</label>
+                              <label class="text-left">Priority</label>
                             </div>
                             <div class="col-md-7">
                               <select
@@ -321,7 +355,7 @@ export default class EngineeringRequestForm extends React.Component {
                                 onChange={this.OnInputChange}
                               >
                                 <option value="high">High</option>
-                                <option value="medium">Medium</option>
+                                <option value="normal">Normal</option>
                                 <option value="low">Low</option>
                               </select>
                             </div>
@@ -338,22 +372,26 @@ export default class EngineeringRequestForm extends React.Component {
                               </label>
                             </div>
                             <div class="col-md-7">
-                              <input
-                                required={true}
-                                type="text"
-                                placeholder="Name"
-                                class="form-control"
-                                name="requestedBy"
-                                value={this.state.requestedBy}
-                                onChange={this.OnInputChange}
-                              />
+                              <select
+                                disabled
+                                class="form-control form-control-sm"
+                                value={this.state.userId}
+                              >
+                                <option>--Select--</option>
+                                {this.state.users &&
+                                  this.state.users.map((user) => (
+                                    <option value={user._id} key={user._id}>
+                                      {user.firstname}
+                                    </option>
+                                  ))}
+                              </select>
                             </div>
                           </div>
                         </div>
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label class="text-right">Project Name: </label>
+                              <label class="text-left">Project Name:</label>
                             </div>
                             <div class="col-md-7">
                               <input
@@ -374,7 +412,7 @@ export default class EngineeringRequestForm extends React.Component {
                           <div class="row">
                             <div class="col-md-5">
                               <label>
-                                MSFT Alias<span class="required">*</span> :
+                                MSFT Alias<span class="required">*</span>:
                               </label>
                             </div>
                             <div class="col-md-7">
@@ -390,12 +428,11 @@ export default class EngineeringRequestForm extends React.Component {
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="row">
+
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label>Support Request Description: </label>
+                              <label>Support Request Description:</label>
                             </div>
                             <div class="col-md-7">
                               <textarea
@@ -410,15 +447,16 @@ export default class EngineeringRequestForm extends React.Component {
                           </div>
                         </div>
                       </div>
+
                       <hr />
                       <h5>Shipment Details </h5>
                       <div class="row">
                         <div class="form-group col-md-6">
                           <div class="row">
-                            <div class="col-md-6">
-                              <label>Shipment Type: </label>
+                            <div class="col-md-5">
+                              <label>Shipment Type:</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                               <select
                                 name="shipmentType"
                                 class="form-control"
@@ -441,10 +479,10 @@ export default class EngineeringRequestForm extends React.Component {
                             this.state.shipmentType === "Other") && (
                             <div class="form-group col-md-6">
                               <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                   <label>{this.state.shipmentType}:</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                   <textarea
                                     class="form-control"
                                     placeholder="Type details here."
@@ -471,13 +509,10 @@ export default class EngineeringRequestForm extends React.Component {
                         />
                       ))}
 
-                      <h5>
-                        Success Criteria<span class="required">*</span>
-                      </h5>
+                      <h5>Success Criteria</h5>
                       <div class="row">
                         <div class="form-group col-md-12 big-textarea">
                           <textarea
-                            required={true}
                             name="successCriteria"
                             class="form-control"
                             placeholder="Type citeria here"
@@ -497,44 +532,48 @@ export default class EngineeringRequestForm extends React.Component {
                         <span>(you can add multiple shared file links)</span>
                       </h5>
 
+                      <div class="row">
+                        <div className="col-6 pr-0 mb-3 ">
+                          <div class="add-link">
+                            <input
+                              className="form-control"
+                              type="text"
+                              name="url"
+                              value={this.state.url}
+                              onChange={this.OnInputChange}
+                              placeholder="Enter shared file link here."
+                            />
+
+                            <button
+                              type="button"
+                              className="btn btn-secondary "
+                              onClick={this.AddFile}
+                            >
+                              Add Link
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
                       {this.state.files &&
                         this.state.files.map((file) => (
-                          <div className="row mb-1" key={file}>
-                            <div className="col-auto">{file}</div>
-                            <div className="col-auto">
-                              <button
-                                type="button"
-                                className="btn btn-outline-danger btn-sm"
-                                onClick={(event) =>
-                                  this.DeleteFile(event, file)
-                                }
-                              >
-                                <i className="fa fa-trash" />
-                              </button>
+                          <div className="row" key={file}>
+                            <div className="col-4">
+                              <span className="link-remove">
+                                {file}
+                                <button
+                                  type="button"
+                                  className="btn btn-outline-danger btn-sm"
+                                  onClick={(event) =>
+                                    this.DeleteFile(event, file)
+                                  }
+                                >
+                                  <i className="fa fa-close" />
+                                </button>
+                              </span>
                             </div>
                           </div>
                         ))}
-                      <div class="row">
-                        <div className="col pr-0">
-                          <input
-                            className="form-control form-control-sm"
-                            type="text"
-                            name="url"
-                            value={this.state.url}
-                            onChange={this.OnInputChange}
-                            placeholder="Enter shared file link here."
-                          />
-                        </div>
-                        <div className="col-auto">
-                          <button
-                            type="button"
-                            className="btn btn-secondary btn-sm"
-                            onClick={this.AddFile}
-                          >
-                            Add Link
-                          </button>
-                        </div>
-                      </div>
 
                       <div class="button">
                         <button
@@ -544,7 +583,11 @@ export default class EngineeringRequestForm extends React.Component {
                           SUBMIT JOB
                         </button>
 
-                        <button class="btn btn-primary save save-draft">
+                        <button
+                          type="button"
+                          onClick={this.SaveDraft}
+                          class="btn btn-primary save save-draft"
+                        >
                           SAVE AS DRAFT
                         </button>
                       </div>

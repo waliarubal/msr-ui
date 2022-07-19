@@ -5,7 +5,7 @@ export class CheckBox extends React.Component {
     super(props);
 
     this.state = {
-      isChecked: props.isChecked,
+      isChecked: props.isChecked || false,
     };
     this._onChecked = this._onChecked.bind(this);
   }
@@ -20,15 +20,18 @@ export class CheckBox extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div class="button r" id="button-1">
+        <div
+          className={
+            this.state.isChecked ? "on-off-switch yes" : "on-off-switch"
+          }
+        >
           <input
             type="checkbox"
             class="checkbox"
             checked={this.state.isChecked}
             onChange={this._onChecked}
           />
-          <div class="knobs"></div>
-          <div class="layer"></div>
+          <div class="handle"></div>
         </div>
       </React.Fragment>
     );

@@ -106,6 +106,7 @@ export default class EngineeringRequests extends React.Component {
                       <table class="table table-striped">
                         <thead class="thead-light">
                           <tr>
+                            <th>Draft</th>
                             <th>Project</th>
                             <th>Submitted</th>
                             <th>Desired Due Date</th>
@@ -123,6 +124,7 @@ export default class EngineeringRequests extends React.Component {
                           {this.state.requests &&
                             this.state.requests.map((request) => (
                               <tr key={request._id}>
+                                <td>{request.isDraft ? "Yes" : "No"}</td>
                                 <td>
                                   <Link
                                     to={`/engineering-request/${request._id}`}

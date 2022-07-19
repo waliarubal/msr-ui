@@ -21,6 +21,7 @@
     "react-aad-msal": "^2.3.5",
     "react-autocomplete": "^1.8.1",
     "react-chartjs-2": "^2.11.2",
+    "react-datetime-picker": "^3.5.0",
     "react-dom": "^16.14.0",
     "react-filepond": "^7.1.2",
     "react-multi-carousel": "^2.8.2",

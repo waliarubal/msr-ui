@@ -10,6 +10,7 @@ class EngineeringRequestFields extends React.Component {
 
     this.state = {
       request: props.request,
+      isReload: false,
       categoryName: "",
       categories: [],
     };
@@ -34,22 +35,37 @@ class EngineeringRequestFields extends React.Component {
       });
   }
 
-  UpdateCategory(category) {
-    axios.put(
-      `${services.baseUrl}${services.categoryUpdate}?authToken=${getToken()}`,
-      category
+  RenameCategory(event, category) {
+    event.preventDefault();
+
+    let name = prompt(
+      `Enter new name for category '${category.categoryName}'.`,
+      category.categoryName
     );
+    if (!name) return;
+    category.categoryName = name;
+
+    this.UpdateCategory(category);
+  }
+
+  UpdateCategory(category) {
+    axios
+      .put(
+        `${services.baseUrl}${services.categoryUpdate}?authToken=${getToken()}`,
+        category
+      )
+      .then((response) => this.setState({ isReload: !this.state.isReload }));
   }
 
   CreateCategory(event) {
     event.preventDefault();
     if (!this.state.categoryName) {
-      alert('Please enter new category name.');
+      alert("Please enter new category name.");
       return;
-    } 
+    }
 
     let categoryName = this.state.categoryName;
-    this.setState({ categoryName: '' });
+    this.setState({ categoryName: "" });
 
     axios
       .post(
@@ -91,7 +107,17 @@ class EngineeringRequestFields extends React.Component {
       <React.Fragment>
         {this.state.categories.map((category) => (
           <tr key={category.categoryId}>
-            <td>{category.categoryName}</td>
+            <td>
+              {category.categoryName}{" "}
+              <button
+                type="button"
+                className="btn btn-outline-success btn-sm"
+                title="Edit Category Name"
+                onClick={(event) => this.RenameCategory(event, category)}
+              >
+                <i className="fas fa-edit"></i>
+              </button>
+            </td>
             <td>
               <CheckBox
                 isChecked={category.isActive}
@@ -185,11 +211,6 @@ export default class EditEngineeringRequestForm extends React.Component {
                         aria-controls="collapseTwo"
                       >
                         {request.name}
-                        <div class="button r" id="button-1">
-                          <input type="checkbox" class="checkbox" />
-                          <div class="knobs"></div>
-                          <div class="layer"></div>
-                        </div>
                       </button>
                     </h2>
                   </div>

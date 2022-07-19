@@ -6,6 +6,7 @@ export const services = {
   deleteRequestById: "/nodebackend/request/deleteById",
   roles: "/nodebackend/role/get",
   createEngineeringRequest: "/nodebackend/eng-request/post",
+  updateEngineeringRequest: "/nodebackend/eng-request/put",
   deleteEngineeringRequest: "/nodebackend/eng-request/delete",
   getEngineeringRequests: "/nodebackend/eng-request/get",
   getEngineeringRequest: "/nodebackend/eng-request/getById",
