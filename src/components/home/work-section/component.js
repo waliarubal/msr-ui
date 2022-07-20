@@ -36,7 +36,7 @@ export default class WorkSection extends React.Component {
                     <div class="work-col">
                       <h3>View History </h3>
 
-                      <Link to="/reqList" class="create-button btn-demo">
+                      <Link to="/engineering-requests" class="create-button btn-demo">
                         View History{" "}
                       </Link>
                     </div>
@@ -47,7 +47,7 @@ export default class WorkSection extends React.Component {
                     <div class="work-col">
                       <h3>My Assigned Tasks </h3>
                       <Link to="/myjobs" class="create-button btn-demo">
-                        ASSIGNED TASKS QUEUE{" "}
+                        ASSIGNED TASKS QUEUE
                       </Link>
                     </div>
                   </div>
@@ -58,8 +58,7 @@ export default class WorkSection extends React.Component {
                   <div class="work-col">
                     <h3>Create New Request</h3>
                     <a onClick={this.openDialog} class="create-button btn-demo">
-                      {" "}
-                      NEW REQUEST{" "}
+                      NEW REQUEST
                     </a>
                   </div>
                 </div>
