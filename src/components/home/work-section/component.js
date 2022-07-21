@@ -1,11 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import EngineeringRequestForm from "../../admin/EngineeringRequestForm";
 
 export default class WorkSection extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      dialogState: false,
+    };
+    this.NewRequest = this.NewRequest.bind(this);
+  }
+
   openDialog = () => {
     this.props.dialogOpen();
   };
+
+  NewRequest() {
+    this.setState({
+      dialogState: true,
+    });
+  }
 
   render() {
     return (
@@ -26,7 +42,10 @@ export default class WorkSection extends React.Component {
                     <div class="work-col">
                       <h3>Requests </h3>
 
-                      <Link to="/engineering-requests" class="create-button btn-demo">
+                      <Link
+                        to="/engineering-requests"
+                        class="create-button btn-demo"
+                      >
                         REQUEST QUEUE
                       </Link>
                     </div>
@@ -36,7 +55,10 @@ export default class WorkSection extends React.Component {
                     <div class="work-col">
                       <h3>View History </h3>
 
-                      <Link to="/engineering-requests" class="create-button btn-demo">
+                      <Link
+                        to="/engineering-requests"
+                        class="create-button btn-demo"
+                      >
                         View History{" "}
                       </Link>
                     </div>
@@ -57,7 +79,7 @@ export default class WorkSection extends React.Component {
                 <div class="col-lg-4 col-md-6 col-sm-12">
                   <div class="work-col">
                     <h3>Create New Request</h3>
-                    <a onClick={this.openDialog} class="create-button btn-demo">
+                    <a onClick={this.NewRequest} class="create-button btn-demo">
                       NEW REQUEST
                     </a>
                   </div>
@@ -66,6 +88,8 @@ export default class WorkSection extends React.Component {
             </div>
           </div>
         </div>
+
+        <EngineeringRequestForm isOpen={this.state.dialogState} />
       </div>
     );
   }
