@@ -86,11 +86,6 @@ export default class EngineeringRequests extends React.Component {
                       aria-controls="collapseOne"
                     >
                       New Request Queue
-                      <div class="button r" id="button-1">
-                        <input type="checkbox" class="checkbox" />
-                        <div class="knobs"></div>
-                        <div class="layer"></div>
-                      </div>
                     </button>
                   </h2>
                 </div>
@@ -114,9 +109,9 @@ export default class EngineeringRequests extends React.Component {
                             <th>Priority</th>
                             <th>Request By</th>
                             <th>MSFT Alias</th>
-                            <th>Status</th>
+                            {/* <th>Status</th>
                             <th>Project Contact</th>
-                            <th>Tech Contact</th>
+                            <th>Tech Contact</th> */}
                             <th></th>
                           </tr>
                         </thead>
@@ -166,7 +161,7 @@ export default class EngineeringRequests extends React.Component {
                                   </select>
                                 </td>
                                 <td>{request.msftAlias}</td>
-                                <td>
+                                {/* <td>
                                   <select
                                     disabled
                                     class="form-control form-control-sm"
@@ -213,7 +208,7 @@ export default class EngineeringRequests extends React.Component {
                                         </option>
                                       ))}
                                   </select>
-                                </td>
+                                </td> */}
                                 <td>
                                   <button
                                     className="btn btn-danger btn-sm"

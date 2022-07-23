@@ -139,6 +139,10 @@ export default class EngineeringRequest extends React.Component {
 
     let requestTypes = this.state.requestTypes;
 
+    this.setState({
+      isDraft: false
+    });
+
     axios
       .put(
         `${services.baseUrl}${
@@ -165,9 +169,11 @@ export default class EngineeringRequest extends React.Component {
         }
       )
       .then((response) => {
-        alert(response.data.message);
         if (response.data.success) {
+          alert("Your request has been submitted. Press OK to continue.");
           this.props.history.push("/engineering-requests");
+        } else {
+          alert(response.data.message);
         }
       });
   }
@@ -237,7 +243,7 @@ export default class EngineeringRequest extends React.Component {
                 <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
-                      <label>Desired Due Date: </label>
+                      <label>Desired Due Date:</label>
                     </div>
                     <div class="col-md-8">
                       <DateTimePicker
@@ -250,7 +256,7 @@ export default class EngineeringRequest extends React.Component {
                   </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                {/* <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
                       <label>Expected Due Date: </label>
@@ -264,7 +270,7 @@ export default class EngineeringRequest extends React.Component {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="row">
@@ -288,7 +294,7 @@ export default class EngineeringRequest extends React.Component {
                   </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                {/* <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
                       <label>Status:</label>
@@ -309,7 +315,7 @@ export default class EngineeringRequest extends React.Component {
                       </select>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div class="row">
@@ -359,7 +365,7 @@ export default class EngineeringRequest extends React.Component {
                 </div>
               </div>
 
-              <div className="row">
+              {/* <div className="row">
                 <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
@@ -407,7 +413,7 @@ export default class EngineeringRequest extends React.Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div class="row">
                 <div class="form-group col-md-12">
@@ -446,6 +452,14 @@ export default class EngineeringRequest extends React.Component {
                       ></textarea>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col">
+                  <small style={{ color: "red" }}>
+                    Fields with * are mandatory
+                  </small>
                 </div>
               </div>
 
@@ -523,6 +537,14 @@ export default class EngineeringRequest extends React.Component {
                         </div>
                       ))}
 
+                    <div className="row">
+                      <div className="col">
+                        <small style={{ color: "red" }}>
+                          Fields with * are mandatory
+                        </small>
+                      </div>
+                    </div>
+
                     <hr />
                     <br />
                   </>
@@ -576,23 +598,25 @@ export default class EngineeringRequest extends React.Component {
                 this.state.files.map((file) => (
                   <div className="row" key={file}>
                     <div className="col-4">
-                              <span className="link-remove">{file}
-                    
-                      <button
-                        type="button"
-                        className="btn btn-outline-danger btn-sm"
-                        onClick={(event) => this.DeleteFile(event, file)}
-                      >
-                        <i className="fa fa-close" />
-                      </button>
+                      <span className="link-remove">
+                        {file}
+
+                        <button
+                          type="button"
+                          className="btn btn-outline-danger btn-sm"
+                          onClick={(event) => this.DeleteFile(event, file)}
+                        >
+                          <i className="fa fa-close" />
+                        </button>
                       </span>
                     </div>
                   </div>
-                ))} 
-
+                ))}
 
               <div className="button ">
-                <button class="btn btn-primary submit-button">SAVE JOB</button>
+                <button class="btn btn-primary submit-button" type="submit">
+                  SUBMIT
+                </button>
               </div>
             </form>
           </div>

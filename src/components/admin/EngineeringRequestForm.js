@@ -78,6 +78,8 @@ class RequestType extends React.Component {
               placeholder="If not present in the list then please type here."
               id="comment"
             ></textarea>
+
+            <small style={{ color: "red" }}>Fields with * are mandatory</small>
           </div>
         </div>
       </React.Fragment>
@@ -226,9 +228,11 @@ export default class EngineeringRequestForm extends React.Component {
         }
       )
       .then((response) => {
-        alert(response.data.message);
         if (response.data.success) {
+          alert("Your request has been submitted. Press OK to continue.");
           this.CloseDialog();
+        } else {
+          alert(response.data.message);
         }
       });
   }
@@ -316,7 +320,9 @@ export default class EngineeringRequestForm extends React.Component {
                     <h4 class="modal-title" id="myModalLabel2">
                       <img src="images/engerinering-form.png" />
                       Engineering Request Form
-                      <span>Fields with * are mandatory</span>
+                      <span style={{ color: "red" }}>
+                        Fields with * are mandatory
+                      </span>
                     </h4>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -444,6 +450,14 @@ export default class EngineeringRequestForm extends React.Component {
                                 onChange={this.OnInputChange}
                               ></textarea>
                             </div>
+                          </div>
+                        </div>
+
+                        <div className="row">
+                          <div className="col">
+                            <small style={{ color: "red" }}>
+                              Fields with * are mandatory
+                            </small>
                           </div>
                         </div>
                       </div>
@@ -580,7 +594,7 @@ export default class EngineeringRequestForm extends React.Component {
                           type="submit"
                           class="btn btn-primary submit-button"
                         >
-                          SUBMIT JOB
+                          SUBMIT
                         </button>
 
                         <button

@@ -50,14 +50,14 @@ export default class AdminHome extends React.Component {
                     </div>
                   </div>
 
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                  {/* <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <h3>My Assigned Tasks </h3>
                       <Link to="/myjobs" class="create-button btn-demo">
                         TASKS QUEUE
                       </Link>
                     </div>
-                  </div>
+                  </div> */}
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <h3>Create New</h3>
@@ -89,7 +89,7 @@ export default class AdminHome extends React.Component {
               <div class="overview-section-inner">
                 <h1> Safety </h1>
                 <Link to="/admin/safety" class="safety-bottom">
-                  SAFETY HOME{" "}
+                  SAFETY HOME
                 </Link>
                 <Link to="/admin/newincident" class="safety-bottom">
                   FILE SAFETY INCIDENT
@@ -102,7 +102,7 @@ export default class AdminHome extends React.Component {
               <div class="project-section-inner">
                 <h1>Tours </h1>
                 <Link to="/tour" class="safety-bottom">
-                  VIEW SCHEDULE TOURS{" "}
+                  VIEW SCHEDULE TOURS
                 </Link>
               </div>
             </div>
@@ -112,10 +112,10 @@ export default class AdminHome extends React.Component {
               <div class="overview-section-inner">
                 <h1>Learning </h1>
                 <Link to="/admin/learning" class="safety-bottom">
-                  VIEW LEARNING TRACKING{" "}
+                  VIEW LEARNING TRACKING
                 </Link>
                 <Link to="/safety" class="safety-bottom">
-                  VIEW TRAINING{" "}
+                  VIEW TRAINING
                 </Link>
               </div>
             </div>
