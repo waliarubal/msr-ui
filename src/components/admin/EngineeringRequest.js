@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { services } from "../common/constant";
-import { getToken, getUserId } from "../common/helpers";
+import { getToken, getUserId, isAdmin } from "../common/helpers";
 import DateTimePicker from "react-datetime-picker";
 
 export default class EngineeringRequest extends React.Component {
@@ -27,7 +27,7 @@ export default class EngineeringRequest extends React.Component {
       expectedCompletionDate: "",
       msftAlias: "",
       requestDescription: "",
-      priority: "normal",
+      priority: "Normal",
       projectName: "",
       successCriteria: "",
       files: [],
@@ -36,6 +36,7 @@ export default class EngineeringRequest extends React.Component {
       modifiedAt: "",
       projectContact: "",
       techContact: "",
+      crmId: "",
     };
 
     this.OnInputChange = this.OnInputChange.bind(this);
@@ -43,14 +44,29 @@ export default class EngineeringRequest extends React.Component {
     this.DeleteFile = this.DeleteFile.bind(this);
     this.OnShipmentTypeChange = this.OnShipmentTypeChange.bind(this);
     this.OnSubmit = this.OnSubmit.bind(this);
+    this.AddToCrm = this.AddToCrm.bind(this);
   }
 
   componentDidMount() {
     this.Populate();
   }
 
+  AddToCrm(event) {
+    event.preventDefault();
+
+    axios
+      .get(`${services.baseUrl}${services.addEngineeringRequestToCrm}`, {
+        params: {
+          authToken: getToken(),
+          id: this.state.id,
+        },
+      })
+      .then((response) => {
+        alert(response.data.message);
+      });
+  }
+
   Populate() {
-    console.log(this.state.id);
     axios
       .get(`${services.baseUrl}${services.reqList}?authToken=${getToken()}`)
       .then((response) => {
@@ -126,6 +142,7 @@ export default class EngineeringRequest extends React.Component {
                           projectContact: record.projectContact,
                           techContact: record.techContact,
                           successCriteria: record.successCriteria,
+                          crmId: record.crmId,
                         });
                       });
                   });
@@ -140,7 +157,7 @@ export default class EngineeringRequest extends React.Component {
     let requestTypes = this.state.requestTypes;
 
     this.setState({
-      isDraft: false
+      isDraft: false,
     });
 
     axios
@@ -166,6 +183,7 @@ export default class EngineeringRequest extends React.Component {
           files: this.state.files,
           userId: this.state.userId,
           isDraft: this.state.isDraft,
+          crmId: this.state.crmId,
         }
       )
       .then((response) => {
@@ -247,6 +265,7 @@ export default class EngineeringRequest extends React.Component {
                     </div>
                     <div class="col-md-8">
                       <DateTimePicker
+                        disabled={true}
                         value={this.state.requestedCompletionDate}
                         onChange={(date) =>
                           this.setState({ requestedCompletionDate: date })
@@ -286,13 +305,45 @@ export default class EngineeringRequest extends React.Component {
                         value={this.state.priority}
                         onChange={this.OnInputChange}
                       >
-                        <option value="high">High</option>
-                        <option value="normal">Normal</option>
-                        <option value="low">Low</option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Low">Low</option>
                       </select>
                     </div>
                   </div>
                 </div>
+
+                {isAdmin() && (
+                  <div class="form-group col-md-6">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label class="text-left">CRM Case:</label>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="input-group">
+                          {this.state.crmId && (
+                            <span class="form-control">
+                              {this.state.crmId}
+                            </span>
+                          )}
+                          {!this.state.crmId && (
+                            <span class="form-control">Not added to CRM</span>
+                          )}
+                          <div class="input-group-append">
+                            <button
+                              type="button"
+                              className="btn btn-secondary"
+                              onClick={this.AddToCrm}
+                            >
+                              Add To CRM
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* <div class="form-group col-md-6">
                   <div class="row">
@@ -419,10 +470,13 @@ export default class EngineeringRequest extends React.Component {
                 <div class="form-group col-md-12">
                   <div class="row">
                     <div class="col-md-3">
-                      <label class="text-left">Project Name:</label>
+                      <label class="text-left">
+                        Project Name<span class="required">*</span>:
+                      </label>
                     </div>
                     <div class="col-md-9">
                       <input
+                        required
                         type="text"
                         name="projectName"
                         placeholder="Project Name"

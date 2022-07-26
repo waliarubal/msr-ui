@@ -8,6 +8,10 @@ function getUserId() {
   return JSON.parse(user)._id;
 }
 
+function isAdmin() {
+  return sessionStorage.getItem("role") !== "User";
+}
+
 function formatDateTime(dateString) {
   if (!dateString) return "";
 
@@ -26,4 +30,5 @@ module.exports = {
   getUserId,
   formatDate,
   formatDateTime,
+  isAdmin
 };

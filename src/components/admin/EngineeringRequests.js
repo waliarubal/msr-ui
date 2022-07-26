@@ -105,7 +105,7 @@ export default class EngineeringRequests extends React.Component {
                             <th>Project</th>
                             <th>Submitted</th>
                             <th>Desired Due Date</th>
-                            <th>Expected Completion Date</th>
+                            {/* <th>Expected Completion Date</th> */}
                             <th>Priority</th>
                             <th>Request By</th>
                             <th>MSFT Alias</th>
@@ -131,18 +131,19 @@ export default class EngineeringRequests extends React.Component {
                                 <td>
                                   {formatDate(request.requestedCompletionDate)}
                                 </td>
-                                <td>
+                                {/* <td>
                                   {formatDate(request.expectedCompletionDate)}
-                                </td>
+                                </td> */}
                                 <td>
                                   <select
                                     disabled
                                     class="form-control form-control-sm"
                                     value={request.priority}
                                   >
-                                    <option value="high">High</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="low">Low</option>
+                                    <option value="Critical">Critical</option>
+                                    <option value="High">High</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Low">Low</option>
                                   </select>
                                 </td>
                                 <td>

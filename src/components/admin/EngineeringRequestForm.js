@@ -104,7 +104,7 @@ export default class EngineeringRequestForm extends React.Component {
       dueDate: new Date(),
       msftAlias: "",
       requestDescription: "",
-      priority: "normal",
+      priority: "Normal",
       projectName: "",
       successCriteria: "",
       files: [],
@@ -351,7 +351,7 @@ export default class EngineeringRequestForm extends React.Component {
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label class="text-left">Priority</label>
+                              <label class="text-left">Priority:</label>
                             </div>
                             <div class="col-md-7">
                               <select
@@ -360,9 +360,10 @@ export default class EngineeringRequestForm extends React.Component {
                                 value={this.state.priority}
                                 onChange={this.OnInputChange}
                               >
-                                <option value="high">High</option>
-                                <option value="normal">Normal</option>
-                                <option value="low">Low</option>
+                                <option value="Critical">Critical</option>
+                                <option value="High">High</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Low">Low</option>
                               </select>
                             </div>
                           </div>
@@ -397,10 +398,13 @@ export default class EngineeringRequestForm extends React.Component {
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label class="text-left">Project Name:</label>
+                              <label class="text-left">
+                                Project Name<span class="required">*</span>:
+                              </label>
                             </div>
                             <div class="col-md-7">
                               <input
+                                required
                                 type="text"
                                 name="projectName"
                                 placeholder="Project Name"

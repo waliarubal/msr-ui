@@ -10,6 +10,7 @@ export const services = {
   deleteEngineeringRequest: "/nodebackend/eng-request/delete",
   getEngineeringRequests: "/nodebackend/eng-request/get",
   getEngineeringRequest: "/nodebackend/eng-request/getById",
+  addEngineeringRequestToCrm: "/nodebackend/eng-request/addToCrm",
   createRequest: "/nodebackend/request/post",
   updateRequest: "/nodebackend/request/put",
   updateRequestById: "/nodebackend/request/putById",
