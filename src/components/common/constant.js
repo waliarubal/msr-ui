@@ -48,3 +48,7 @@ export const services = {
   // getFTEUsers: '/nodebackend/getFTEUsers'
   // this comment for rebuild trigger
 };
+
+export const Constants = {
+  HARDWARE_LAB_CABINET: '6246994b391477902c1e9641'
+};

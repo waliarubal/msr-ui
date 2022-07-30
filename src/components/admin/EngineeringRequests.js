@@ -105,13 +105,9 @@ export default class EngineeringRequests extends React.Component {
                             <th>Project</th>
                             <th>Submitted</th>
                             <th>Desired Due Date</th>
-                            {/* <th>Expected Completion Date</th> */}
                             <th>Priority</th>
                             <th>Request By</th>
-                            <th>MSFT Alias</th>
-                            {/* <th>Status</th>
-                            <th>Project Contact</th>
-                            <th>Tech Contact</th> */}
+                            <th>Customer</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -131,9 +127,6 @@ export default class EngineeringRequests extends React.Component {
                                 <td>
                                   {formatDate(request.requestedCompletionDate)}
                                 </td>
-                                {/* <td>
-                                  {formatDate(request.expectedCompletionDate)}
-                                </td> */}
                                 <td>
                                   <select
                                     disabled
@@ -161,30 +154,11 @@ export default class EngineeringRequests extends React.Component {
                                       ))}
                                   </select>
                                 </td>
-                                <td>{request.msftAlias}</td>
-                                {/* <td>
-                                  <select
-                                    disabled
-                                    class="form-control form-control-sm"
-                                    value={request.status}
-                                  >
-                                    <option>--Select--</option>
-                                    {this.state.statuses &&
-                                      this.state.statuses.map((status) => (
-                                        <option
-                                          value={status._id}
-                                          key={status._id}
-                                        >
-                                          {status.name}
-                                        </option>
-                                      ))}
-                                  </select>
-                                </td>
                                 <td>
                                   <select
                                     disabled
                                     class="form-control form-control-sm"
-                                    value={request.projectContact}
+                                    value={request.customerId}
                                   >
                                     <option>--Select--</option>
                                     {this.state.users &&
@@ -195,21 +169,6 @@ export default class EngineeringRequests extends React.Component {
                                       ))}
                                   </select>
                                 </td>
-                                <td>
-                                  <select
-                                    disabled
-                                    class="form-control form-control-sm"
-                                    value={request.techContact}
-                                  >
-                                    <option>--Select--</option>
-                                    {this.state.users &&
-                                      this.state.users.map((user) => (
-                                        <option value={user._id} key={user._id}>
-                                          {user.firstname}
-                                        </option>
-                                      ))}
-                                  </select>
-                                </td> */}
                                 <td>
                                   <button
                                     className="btn btn-danger btn-sm"

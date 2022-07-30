@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { services } from "../common/constant";
-import { getToken, getUserId } from "../common/helpers";
+import { services, Constants } from "../common/constant";
+import { getToken, getUserAlias, getUserId } from "../common/helpers";
 import DateTimePicker from "react-datetime-picker";
 
 class RequestType extends React.Component {
@@ -99,17 +99,19 @@ export default class EngineeringRequestForm extends React.Component {
       url: "",
       // form fields
       requestTypes: [],
-      shipmentTypeId: "",
+      shipmentTypeId: Constants.HARDWARE_LAB_CABINET,
       shipmentAddress: "",
       dueDate: new Date(),
-      msftAlias: "",
+      userId: getUserId(),
+      msftAlias: getUserAlias(),
+      customerId: getUserId(),
+      customerMsftAlias: getUserAlias(),
       requestDescription: "",
       priority: "Normal",
       projectName: "",
       successCriteria: "",
       files: [],
       isDraft: false,
-      userId: getUserId(),
     };
 
     this.OnInputChange = this.OnInputChange.bind(this);
@@ -216,14 +218,16 @@ export default class EngineeringRequestForm extends React.Component {
           shipmentTypeId: this.state.shipmentTypeId,
           shipmentAddress: this.state.shipmentAddress,
           dueDate: this.state.dueDate,
+          userId: this.state.userId,
           msftAlias: this.state.msftAlias,
+          customerId: this.state.customerId,
+          customerMsftAlias: this.state.customerMsftAlias,
           requestDescription: this.state.requestDescription,
           priority: this.state.priority,
           projectName: this.state.projectName || "N/A",
           requestTypes: requestTypes,
           successCriteria: this.state.successCriteria,
           files: this.state.files,
-          userId: this.state.userId,
           isDraft: this.state.isDraft,
         }
       )
@@ -339,6 +343,7 @@ export default class EngineeringRequestForm extends React.Component {
                             </div>
                             <div class="col-md-7">
                               <DateTimePicker
+                                format="MM-dd-y HH:mm"
                                 name="dueDate"
                                 value={this.state.dueDate}
                                 onChange={(date) =>
@@ -395,29 +400,7 @@ export default class EngineeringRequestForm extends React.Component {
                             </div>
                           </div>
                         </div>
-                        <div class="form-group col-md-6">
-                          <div class="row">
-                            <div class="col-md-5">
-                              <label class="text-left">
-                                Project Name<span class="required">*</span>:
-                              </label>
-                            </div>
-                            <div class="col-md-7">
-                              <input
-                                required
-                                type="text"
-                                name="projectName"
-                                placeholder="Project Name"
-                                class="form-control"
-                                value={this.state.projectName}
-                                onChange={this.OnInputChange}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
 
-                      <div class="row">
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
@@ -433,6 +416,80 @@ export default class EngineeringRequestForm extends React.Component {
                                 class="form-control"
                                 name="msftAlias"
                                 value={this.state.msftAlias}
+                                onChange={this.OnInputChange}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>
+                                Customer<span class="required">*</span>:
+                              </label>
+                            </div>
+                            <div class="col-md-7">
+                              <select
+                                required
+                                name="customerId"
+                                onChange={this.OnInputChange}
+                                class="form-control form-control-sm"
+                                value={this.state.customerId}
+                              >
+                                <option>--Select--</option>
+                                {this.state.users &&
+                                  this.state.users.map((user) => (
+                                    <option value={user._id} key={user._id}>
+                                      {user.firstname}
+                                    </option>
+                                  ))}
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>
+                                Customer MSFT Alias
+                                <span class="required">*</span>:
+                              </label>
+                            </div>
+                            <div class="col-md-7">
+                              <input
+                                required={true}
+                                type="text"
+                                placeholder="Alias"
+                                class="form-control"
+                                name="customerMsftAlias"
+                                value={this.state.customerMsftAlias}
+                                onChange={this.OnInputChange}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label class="text-left">
+                                Project Name<span class="required">*</span>:
+                              </label>
+                            </div>
+                            <div class="col-md-7">
+                              <input
+                                required
+                                type="text"
+                                name="projectName"
+                                placeholder="Project Name"
+                                class="form-control"
+                                value={this.state.projectName}
                                 onChange={this.OnInputChange}
                               />
                             </div>
@@ -472,7 +529,7 @@ export default class EngineeringRequestForm extends React.Component {
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label>Shipment Type:</label>
+                              <label>Delivery Method:</label>
                             </div>
                             <div class="col-md-7">
                               <select

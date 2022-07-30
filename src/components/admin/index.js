@@ -30,22 +30,20 @@ export default class AdminHome extends React.Component {
               <div class="work-section-inner">
                 <h2>Requests </h2>
                 <div class="row justify-content-md-center">
-                  {/* <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                    <div class="work-col">
-                      <h3>Requests </h3>
-                      <Link to="/reqList" class="create-button btn-demo">
-                        OLD
-                      </Link>
-                    </div>
-                  </div> */}
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
-                      <h3>Requests </h3>
+                      <Link to="/reqList" class="create-button btn-demo">
+                        Old Cases
+                      </Link>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                    <div class="work-col">
                       <Link
                         to="/engineering-requests"
                         class="create-button btn-demo"
                       >
-                        REQUEST QUEUE
+                        View Existing Requests
                       </Link>
                     </div>
                   </div>
@@ -60,23 +58,21 @@ export default class AdminHome extends React.Component {
                   </div> */}
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
-                      <h3>Create New</h3>
                       <a
                         onClick={this.openDialog}
                         class="create-button btn-demo"
                       >
-                        NEW REQUEST
+                        Create New Request
                       </a>
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
-                      <h3>Request Form </h3>
                       <Link
                         to="/admin/engineering-request-form"
                         class="create-button btn-demo"
                       >
-                        EDIT
+                        Manage Request Form
                       </Link>
                     </div>
                   </div>
