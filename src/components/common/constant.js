@@ -50,5 +50,5 @@ export const services = {
 };
 
 export const Constants = {
-  HARDWARE_LAB_CABINET: '6246994b391477902c1e9641'
+  HARDWARE_LAB_CABINET: 4
 };

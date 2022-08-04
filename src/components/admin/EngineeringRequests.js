@@ -133,10 +133,10 @@ export default class EngineeringRequests extends React.Component {
                                     class="form-control form-control-sm"
                                     value={request.priority}
                                   >
-                                    <option value="Critical">Critical</option>
-                                    <option value="High">High</option>
-                                    <option value="Normal">Normal</option>
-                                    <option value="Low">Low</option>
+                                    <option value={4}>Critical</option>
+                                    <option value={1}>High</option>
+                                    <option value={2}>Normal</option>
+                                    <option value={3}>Low</option>
                                   </select>
                                 </td>
                                 <td>

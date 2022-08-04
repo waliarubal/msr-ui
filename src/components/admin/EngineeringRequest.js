@@ -29,7 +29,7 @@ export default class EngineeringRequest extends React.Component {
       requestedCompletionDate: "",
       expectedCompletionDate: "",
       requestDescription: "",
-      priority: "Normal",
+      priority: 2,
       projectName: "",
       successCriteria: "",
       files: [],
@@ -284,22 +284,6 @@ export default class EngineeringRequest extends React.Component {
                     </div>
                   </div>
                 </div>
-
-                {/* <div class="form-group col-md-6">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>Expected Due Date: </label>
-                    </div>
-                    <div class="col-md-8">
-                      <DateTimePicker
-                        value={this.state.expectedCompletionDate}
-                        onChange={(date) =>
-                          this.setState({ expectedCompletionDate: date })
-                        }
-                      />
-                    </div>
-                  </div>
-                </div> */}
               </div>
 
               <div className="row">
@@ -315,10 +299,10 @@ export default class EngineeringRequest extends React.Component {
                         value={this.state.priority}
                         onChange={this.OnInputChange}
                       >
-                        <option value="Critical">Critical</option>
-                        <option value="High">High</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Low">Low</option>
+                        <option value={4}>Critical</option>
+                        <option value={1}>High</option>
+                        <option value={2}>Normal</option>
+                        <option value={3}>Low</option>
                       </select>
                     </div>
                   </div>
@@ -352,29 +336,6 @@ export default class EngineeringRequest extends React.Component {
                     </div>
                   </div>
                 )}
-
-                {/* <div class="form-group col-md-6">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>Status:</label>
-                    </div>
-                    <div class="col-md-8">
-                      <select
-                        className="form-control"
-                        name="status"
-                        value={this.state.status}
-                        onChange={this.OnInputChange}
-                      >
-                        {this.state.statuses &&
-                          this.state.statuses.map((type) => (
-                            <option key={type._id} value={type._id}>
-                              {type.name}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                  </div>
-                </div> */}
               </div>
 
               <div class="row">
@@ -474,56 +435,6 @@ export default class EngineeringRequest extends React.Component {
                   </div>
                 </div>
               </div>
-
-              {/* <div className="row">
-                <div class="form-group col-md-6">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>Project Contact:</label>
-                    </div>
-                    <div class="col-md-8">
-                      <select
-                        name="projectContact"
-                        class="form-control form-control-sm"
-                        value={this.state.projectContact}
-                        onChange={this.OnInputChange}
-                      >
-                        <option>--Select--</option>
-                        {this.state.users &&
-                          this.state.users.map((user) => (
-                            <option value={user._id} key={user._id}>
-                              {user.firstname}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>Technical Contact:</label>
-                    </div>
-                    <div class="col-md-8">
-                      <select
-                        name="techContact"
-                        class="form-control form-control-sm"
-                        onChange={this.OnInputChange}
-                        value={this.state.techContact}
-                      >
-                        <option>--Select--</option>
-                        {this.state.users &&
-                          this.state.users.map((user) => (
-                            <option value={user._id} key={user._id}>
-                              {user.firstname}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
 
               <div class="row">
                 <div class="form-group col-md-12">
