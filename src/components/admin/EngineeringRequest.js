@@ -343,7 +343,7 @@ export default class EngineeringRequest extends React.Component {
                   <div class="row">
                     <div class="col-md-4">
                       <label>
-                        Requested By<span class="required">*</span>:
+                        Submitted By<span class="required">*</span>:
                       </label>
                     </div>
                     <div class="col-md-8">

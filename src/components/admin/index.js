@@ -33,7 +33,7 @@ export default class AdminHome extends React.Component {
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <Link to="/reqList" class="create-button btn-demo">
-                        Old Cases
+                        Legacy Cases
                       </Link>
                     </div>
                   </div>

@@ -106,7 +106,7 @@ export default class EngineeringRequests extends React.Component {
                             <th>Submitted</th>
                             <th>Desired Due Date</th>
                             <th>Priority</th>
-                            <th>Request By</th>
+                            <th>Submitted By</th>
                             <th>Customer</th>
                             <th></th>
                           </tr>
