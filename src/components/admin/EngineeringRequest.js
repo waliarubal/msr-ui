@@ -207,7 +207,7 @@ export default class EngineeringRequest extends React.Component {
 
   OnShipmentTypeChange(event) {
     let value = event.target.value;
-    let name = this.state.shipmentTypes.filter((r) => r._id === value);
+    let name = this.state.shipmentTypes.filter((r) => r._id == value);
     if (name.length == 0) return;
     this.setState({
       shipmentType: name[0].name,
@@ -259,12 +259,6 @@ export default class EngineeringRequest extends React.Component {
               <img src="images/engerinering-form.png" />
               Engineering Request
             </h5>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
             <form onSubmit={this.OnSubmit}>
               <div class="row">
                 <div class="form-group col-md-6">

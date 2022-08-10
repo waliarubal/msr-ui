@@ -101,7 +101,7 @@ export default class EngineeringRequestForm extends React.Component {
       requestTypes: [],
       shipmentTypeId: Constants.HARDWARE_LAB_CABINET,
       shipmentAddress: "",
-      dueDate: new Date(),
+      dueDate: null,
       userId: getUserId(),
       msftAlias: getUserAlias(),
       customerId: getUserId(),
@@ -175,7 +175,7 @@ export default class EngineeringRequestForm extends React.Component {
 
   OnShipmentTypeChange(event) {
     let value = event.target.value;
-    let name = this.state.shipmentTypes.filter((r) => r._id === value);
+    let name = this.state.shipmentTypes.filter((r) => r._id == value);
     if (name.length == 0) return;
     this.setState({
       shipmentType: name[0].name,
@@ -328,12 +328,6 @@ export default class EngineeringRequestForm extends React.Component {
                         Fields with * are mandatory
                       </span>
                     </h4>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
                     <form onSubmit={this.OnSubmit}>
                       <div class="row">
                         <div class="form-group col-md-6">
@@ -495,13 +489,17 @@ export default class EngineeringRequestForm extends React.Component {
                             </div>
                           </div>
                         </div>
+                      </div>
 
-                        <div class="form-group col-md-6">
+                      <div className="row">
+                        <div class="form-group col-md-12">
                           <div class="row">
                             <div class="col-md-5">
                               <label>Support Request Description:</label>
                             </div>
-                            <div class="col-md-7">
+                          </div>
+                          <div className="row">
+                            <div class="col-md-12">
                               <textarea
                                 class="form-control"
                                 placeholder="Type description here"
