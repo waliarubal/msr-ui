@@ -192,6 +192,25 @@ export default class EngineeringRequestForm extends React.Component {
     this.OnSubmit(event);
   }
 
+  Clear() {
+    this.setState({
+      requestTypes: [],
+      shipmentTypeId: Constants.HARDWARE_LAB_CABINET,
+      shipmentAddress: "",
+      dueDate: null,
+      userId: getUserId(),
+      msftAlias: getUserAlias(),
+      customerId: getUserId(),
+      customerMsftAlias: getUserAlias(),
+      requestDescription: "",
+      priority: 2,
+      projectName: "",
+      successCriteria: "",
+      files: [],
+      isDraft: false,
+    });
+  }
+
   OnSubmit(event) {
     event.preventDefault();
 
@@ -234,6 +253,7 @@ export default class EngineeringRequestForm extends React.Component {
       .then((response) => {
         if (response.data.success) {
           alert("Your request has been submitted. Press OK to continue.");
+          this.Clear();
           this.CloseDialog();
         } else {
           alert(response.data.message);
@@ -281,8 +301,10 @@ export default class EngineeringRequestForm extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.isOpen != this.props.isOpen)
+    if (prevState.isOpen != this.props.isOpen) {
       this.setState({ isOpen: this.props.isOpen });
+      this.Populate();
+    }
   }
 
   componentDidMount() {
