@@ -1,7 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Dialog from '../home/dialog'
 import { services } from '../common/constant'
 
 export default class RequestFiles extends React.Component {

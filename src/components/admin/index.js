@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Dialog from "../home/dialog";
 import EngineeringRequestForm from "./EngineeringRequestForm";
 
 export default class AdminHome extends React.Component {
@@ -11,7 +10,6 @@ export default class AdminHome extends React.Component {
     };
   }
   closeDialog = () => {
-    // console.log('asd')
     this.setState({
       dialogState: false,
     });
@@ -47,15 +45,6 @@ export default class AdminHome extends React.Component {
                       </Link>
                     </div>
                   </div>
-
-                  {/* <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                    <div class="work-col">
-                      <h3>My Assigned Tasks </h3>
-                      <Link to="/myjobs" class="create-button btn-demo">
-                        TASKS QUEUE
-                      </Link>
-                    </div>
-                  </div> */}
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="work-col">
                       <a
@@ -115,15 +104,10 @@ export default class AdminHome extends React.Component {
                 </Link>
               </div>
             </div>
-          </div>{" "}
+          </div>
         </div>
 
         <EngineeringRequestForm isOpen={this.state.dialogState} />
-
-        {/* <Dialog
-          enable={this.state.dialogState}
-          closeDialog={this.closeDialog}
-        /> */}
       </React.Fragment>
     );
   }
