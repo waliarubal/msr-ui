@@ -213,12 +213,6 @@ export default class Dialog extends React.Component {
           isupdate
         );
       });
-    // axios.get(services.baseUrl + services.shipmentTypesList + '?authToken=' + sessionStorage.getItem('authToken'), { '_id': valueId }).then(response => {
-    //   this.setState({
-    //     shipmentTypesList: response.data.data
-    //   })
-    // this.handleChangeShipment('', response.data.data[0].id, isupdate)
-    // })
   };
   handleChangeShipment = (e, id, isupdate = false) => {
     var formData = { ...this.state.formData };

@@ -1585,7 +1585,6 @@ span.link-remove {
   line-height: 20px;
 }
 .modal {
- 
   background: #000000ab;
 }
 span.link-remove button.btn.btn-outline-danger.btn-sm {
@@ -1607,13 +1606,12 @@ span.link-remove button.btn.btn-outline-danger.btn-sm {
   float: left;
   border-bottom: 1px solid #dbdbdb !important;
   height: 40px;
-} 
+}
 span.required {
   color: red;
 }
 .edit-request-form.reust-page .add-link input.form-control {
   width: 85%;
-  
 }
 .edit-request-form.reust-page .button {
   margin: 50px 0 15px;
@@ -1622,12 +1620,13 @@ span.required {
   height: auto;
 }
 .edit-request-form.reust-page .btn-primary {
-color: #fff;
-    background-color: #54a3db !important;
-    border-color: #54a3db !important;
-    padding: 0 50px 0 44px;
-    line-height: 50px; }
-.edit-request-form.reust-page.Request-form h4{
+  color: #fff;
+  background-color: #54a3db !important;
+  border-color: #54a3db !important;
+  padding: 0 50px 0 44px;
+  line-height: 50px;
+}
+.edit-request-form.reust-page.Request-form h4 {
   margin-bottom: 30px !important;
   font-size: 1.25rem !important;
 }
@@ -1637,12 +1636,12 @@ color: #fff;
   font-style: italic;
 }
 .edit-request-form.reust-page .add-link button.btn.btn-secondary {
-   border-radius: 0;
-   background: #e9ecef;
-   color: #212529;
-   border: none;
-   height: 40px;
-   width: 15%;
+  border-radius: 0;
+  background: #e9ecef;
+  color: #212529;
+  border: none;
+  height: 40px;
+  width: 15%;
 }
 .edit-request-form.reust-page select.form-control {
   max-width: 100%;
@@ -1651,18 +1650,23 @@ color: #fff;
 .edit-request-form.reust-page textarea {
   border: 1px solid #a9a9a9 !important;
   width: 100%;
-    padding: 0.375rem 0.75rem;
-
+  padding: 0.375rem 0.75rem;
 }
 .add-link button.btn.btn-secondary {
   border-radius: 0;
   background: #e9ecef;
-  color:#212529; border:none;
+  color: #212529;
+  border: none;
   height: 40px;
-    width: 19%;
+  width: 19%;
 }
-.add-link button.btn.btn-secondary:hover { background: #3f82af; color:#fff; }
-.react-datetime-picker  { width:100%;}
+.add-link button.btn.btn-secondary:hover {
+  background: #3f82af;
+  color: #fff;
+}
+.react-datetime-picker {
+  width: 100%;
+}
 .edit-request-form table.table.table-striped {
   border-bottom: 1px solid #cdcdcd;
   border-right: 1px solid #cdcdcd;
@@ -1729,18 +1733,19 @@ color: #fff;
   background: #ffff;
   box-shadow: 1px 2px #cccc;
 }
-.btn-link.focus, .btn-link:focus {
+.btn-link.focus,
+.btn-link:focus {
   text-decoration: none;
-} 
+}
 .edit-request-form .table td button.btn.btn-outline-success.btn-sm {
   border: none;
   float: right;
   opacity: 0;
-} 
+}
 .edit-request-form .table td button.btn.btn-outline-success.btn-sm:hover {
   background: transparent;
   color: green;
-} 
+}
 .edit-request-form .table tr td:hover button.btn.btn-outline-success.btn-sm {
   opacity: 1;
 }
@@ -1762,10 +1767,10 @@ color: #fff;
 .on-off-switch.yes {
   background: green;
 }
-.on-off-switch   {
+.on-off-switch {
   position: relative;
 }
-.on-off-switch  input.yes .handle {
+.on-off-switch input.yes .handle {
   left: 2.8125rem;
   transition: left 0.25s;
 }
@@ -1855,7 +1860,7 @@ a.add-new {
   line-height: 18px;
   padding-left: 10px;
   display: inline-block;
-  font-size:13px;
+  font-size: 13px;
 }
 .edit-request-form .accordion h2 button.btn.btn-link .button {
   float: right;
@@ -1886,4 +1891,7 @@ a.add-new {
 a.add-new:hover {
   text-decoration: none;
   color: #fff !important;
+}
+.modal-content button.close {
+  z-index: 999;
 }
