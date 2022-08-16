@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { services, Constants } from "../common/constant";
-import { getToken, getUserAlias, getUserId } from "../common/helpers";
+import { getAliasFromEmail, getToken, getUserAlias, getUserId } from "../common/helpers";
 import DateTimePicker from "react-datetime-picker";
 
 class RequestType extends React.Component {
@@ -123,6 +123,7 @@ export default class EngineeringRequestForm extends React.Component {
     this.AddFile = this.AddFile.bind(this);
     this.DeleteFile = this.DeleteFile.bind(this);
     this.OnDateChange = this.OnDateChange.bind(this);
+    this.OnCustomerChange = this.OnCustomerChange.bind(this);
   }
 
   CloseDialog() {
@@ -180,6 +181,15 @@ export default class EngineeringRequestForm extends React.Component {
     this.setState({
       shipmentType: name[0].name,
       shipmentTypeId: value,
+    });
+  }
+
+  OnCustomerChange(e) {
+    let value = e.target.value;
+    let email = this.state.users.filter(r => r._id == value)[0].email;
+    this.setState({
+      customerId: value,
+      customerMsftAlias: getAliasFromEmail(email)
     });
   }
 
@@ -451,7 +461,7 @@ export default class EngineeringRequestForm extends React.Component {
                               <select
                                 required
                                 name="customerId"
-                                onChange={this.OnInputChange}
+                                onChange={this.OnCustomerChange}
                                 class="form-control form-control-sm"
                                 value={this.state.customerId}
                               >

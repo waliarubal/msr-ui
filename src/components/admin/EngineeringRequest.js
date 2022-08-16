@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Constants, services } from "../common/constant";
-import { getToken, getUserId, isAdmin } from "../common/helpers";
+import { getToken, getAliasFromEmail, isAdmin } from "../common/helpers";
 import DateTimePicker from "react-datetime-picker";
 
 export default class EngineeringRequest extends React.Component {
@@ -47,6 +47,7 @@ export default class EngineeringRequest extends React.Component {
     this.OnShipmentTypeChange = this.OnShipmentTypeChange.bind(this);
     this.OnSubmit = this.OnSubmit.bind(this);
     this.AddToCrm = this.AddToCrm.bind(this);
+    this.OnCustomerChange = this.OnCustomerChange.bind(this);
   }
 
   componentDidMount() {
@@ -224,6 +225,15 @@ export default class EngineeringRequest extends React.Component {
     });
   }
 
+  OnCustomerChange(e) {
+    let value = e.target.value;
+    let email = this.state.users.filter(r => r._id == value)[0].email;
+    this.setState({
+      customerId: value,
+      customerMsftAlias: getAliasFromEmail(email)
+    });
+  }
+
   AddFile(event) {
     event.preventDefault();
 
@@ -393,7 +403,7 @@ export default class EngineeringRequest extends React.Component {
                         required
                         name="customerId"
                         class="form-control form-control-sm"
-                        onChange={this.OnInputChange}
+                        onChange={this.OnCustomerChange}
                         value={this.state.customerId}
                       >
                         <option>--Select--</option>

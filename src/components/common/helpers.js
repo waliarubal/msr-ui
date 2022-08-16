@@ -17,6 +17,12 @@ function getUserAlias() {
   return email.substring(0, email.lastIndexOf("@"));
 }
 
+function getAliasFromEmail(email) {
+  if (!email) return '';
+
+  return email.substring(0, email.lastIndexOf("@"));
+}
+
 function isAdmin() {
   return sessionStorage.getItem("role") !== "User";
 }
@@ -40,5 +46,6 @@ module.exports = {
   formatDate,
   formatDateTime,
   isAdmin,
-  getUserAlias
+  getUserAlias,
+  getAliasFromEmail
 };
