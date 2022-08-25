@@ -227,10 +227,10 @@ export default class EngineeringRequest extends React.Component {
 
   OnCustomerChange(e) {
     let value = e.target.value;
-    let email = this.state.users.filter(r => r._id == value)[0].email;
+    let email = this.state.users.filter((r) => r._id == value)[0].email;
     this.setState({
       customerId: value,
-      customerMsftAlias: getAliasFromEmail(email)
+      customerMsftAlias: getAliasFromEmail(email),
     });
   }
 
@@ -395,11 +395,20 @@ export default class EngineeringRequest extends React.Component {
                   <div class="row">
                     <div class="col-md-4">
                       <label>
-                        Customer<span class="required">*</span>:
+                        Customer Email<span class="required">*</span>:
                       </label>
                     </div>
                     <div class="col-md-8">
-                      <select
+                      <input
+                        required
+                        type="text"
+                        placeholder="Alias"
+                        class="form-control"
+                        name="customerId"
+                        value={this.state.customerId}
+                        onChange={this.OnInputChange}
+                      />
+                      {/* <select
                         required
                         name="customerId"
                         class="form-control form-control-sm"
@@ -413,12 +422,12 @@ export default class EngineeringRequest extends React.Component {
                               {user.firstname}
                             </option>
                           ))}
-                      </select>
+                      </select> */}
                     </div>
                   </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                {/* <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
                       <label>
@@ -437,7 +446,7 @@ export default class EngineeringRequest extends React.Component {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div class="row">

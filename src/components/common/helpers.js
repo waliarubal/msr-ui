@@ -8,6 +8,15 @@ function getUserId() {
   return JSON.parse(user)._id;
 }
 
+function getUserEmail() {
+  let user = sessionStorage.getItem("user");
+  if (!user) return "";
+  let email = JSON.parse(user).username;
+  if (!email) return "";
+
+  return email;
+}
+
 function getUserAlias() {
   let user = sessionStorage.getItem("user");
   if (!user) return "";
@@ -47,5 +56,6 @@ module.exports = {
   formatDateTime,
   isAdmin,
   getUserAlias,
-  getAliasFromEmail
+  getAliasFromEmail,
+  getUserEmail
 };

@@ -107,7 +107,7 @@ export default class EngineeringRequests extends React.Component {
                             <th>Desired Due Date</th>
                             <th>Priority</th>
                             <th>Submitted By</th>
-                            <th>Customer</th>
+                            <th>Customer Email</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -155,7 +155,8 @@ export default class EngineeringRequests extends React.Component {
                                   </select>
                                 </td>
                                 <td>
-                                  <select
+                                  {request.customerId}
+                                  {/* <select
                                     disabled
                                     class="form-control form-control-sm"
                                     value={request.customerId}
@@ -167,7 +168,7 @@ export default class EngineeringRequests extends React.Component {
                                           {user.firstname}
                                         </option>
                                       ))}
-                                  </select>
+                                  </select> */}
                                 </td>
                                 <td>
                                   <button

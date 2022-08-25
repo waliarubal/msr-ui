@@ -1,8 +1,15 @@
 import React from "react";
 import axios from "axios";
 import { services, Constants } from "../common/constant";
-import { getAliasFromEmail, getToken, getUserAlias, getUserId } from "../common/helpers";
+import {
+  getAliasFromEmail,
+  getToken,
+  getUserAlias,
+  getUserEmail,
+  getUserId,
+} from "../common/helpers";
 import DateTimePicker from "react-datetime-picker";
+import Autocomplete from "react-autocomplete";
 
 class RequestType extends React.Component {
   constructor(props) {
@@ -104,7 +111,7 @@ export default class EngineeringRequestForm extends React.Component {
       dueDate: null,
       userId: getUserId(),
       msftAlias: getUserAlias(),
-      customerId: getUserId(),
+      customerId: getUserEmail(), //getUserId(),
       customerMsftAlias: getUserAlias(),
       requestDescription: "",
       priority: 2,
@@ -186,10 +193,10 @@ export default class EngineeringRequestForm extends React.Component {
 
   OnCustomerChange(e) {
     let value = e.target.value;
-    let email = this.state.users.filter(r => r._id == value)[0].email;
+    let email = this.state.users.filter((r) => r._id == value)[0].email;
     this.setState({
       customerId: value,
-      customerMsftAlias: getAliasFromEmail(email)
+      customerMsftAlias: getAliasFromEmail(email),
     });
   }
 
@@ -454,11 +461,20 @@ export default class EngineeringRequestForm extends React.Component {
                           <div class="row">
                             <div class="col-md-5">
                               <label>
-                                Customer<span class="required">*</span>:
+                                Customer Email<span class="required">*</span>:
                               </label>
                             </div>
                             <div class="col-md-7">
-                              <select
+                              <input
+                                required={true}
+                                type="text"
+                                placeholder="Alias"
+                                class="form-control"
+                                name="customerId"
+                                value={this.state.customerId}
+                                onChange={this.OnInputChange}
+                              />
+                              {/* <select
                                 required
                                 name="customerId"
                                 onChange={this.OnCustomerChange}
@@ -472,12 +488,14 @@ export default class EngineeringRequestForm extends React.Component {
                                       {user.firstname}
                                     </option>
                                   ))}
-                              </select>
+                              </select> */}
+                              {/* https://github.com/reactjs/react-autocomplete */}
+                              {/* <Autocomplete /> */}
                             </div>
                           </div>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        {/* <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
                               <label>
@@ -497,7 +515,7 @@ export default class EngineeringRequestForm extends React.Component {
                               />
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
 
                       <div class="row">
