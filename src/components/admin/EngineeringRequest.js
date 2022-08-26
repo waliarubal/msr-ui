@@ -227,7 +227,7 @@ export default class EngineeringRequest extends React.Component {
 
   OnCustomerChange(e) {
     let value = e.target.value;
-    let email = this.state.users.filter((r) => r._id == value)[0].email;
+    let email = value; //this.state.users.filter((r) => r._id == value)[0].email;
     this.setState({
       customerId: value,
       customerMsftAlias: getAliasFromEmail(email),
@@ -371,13 +371,11 @@ export default class EngineeringRequest extends React.Component {
                 <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
-                      <label>
-                        MSFT Alias<span class="required">*</span>:
-                      </label>
+                      <label>MSFT Alias:</label>
                     </div>
                     <div class="col-md-8">
                       <input
-                        required
+                        readOnly={true}
                         type="text"
                         placeholder="Alias"
                         class="form-control"
@@ -406,7 +404,7 @@ export default class EngineeringRequest extends React.Component {
                         class="form-control"
                         name="customerId"
                         value={this.state.customerId}
-                        onChange={this.OnInputChange}
+                        onChange={this.OnCustomerChange}
                       />
                       {/* <select
                         required
@@ -427,16 +425,14 @@ export default class EngineeringRequest extends React.Component {
                   </div>
                 </div>
 
-                {/* <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
-                      <label>
-                        Customer MSFT Alias<span class="required">*</span>:
-                      </label>
+                      <label>Customer MSFT Alias:</label>
                     </div>
                     <div class="col-md-8">
                       <input
-                        required
+                        readOnly={true}
                         type="text"
                         placeholder="Alias"
                         class="form-control"
@@ -446,7 +442,7 @@ export default class EngineeringRequest extends React.Component {
                       />
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
 
               <div class="row">

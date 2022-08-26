@@ -193,7 +193,7 @@ export default class EngineeringRequestForm extends React.Component {
 
   OnCustomerChange(e) {
     let value = e.target.value;
-    let email = this.state.users.filter((r) => r._id == value)[0].email;
+    let email = e.target.value; //this.state.users.filter((r) => r._id == value)[0].email;
     this.setState({
       customerId: value,
       customerMsftAlias: getAliasFromEmail(email),
@@ -437,13 +437,11 @@ export default class EngineeringRequestForm extends React.Component {
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label>
-                                MSFT Alias<span class="required">*</span>:
-                              </label>
+                              <label>MSFT Alias:</label>
                             </div>
                             <div class="col-md-7">
                               <input
-                                required={true}
+                                readOnly={true}
                                 type="text"
                                 placeholder="Alias"
                                 class="form-control"
@@ -472,7 +470,7 @@ export default class EngineeringRequestForm extends React.Component {
                                 class="form-control"
                                 name="customerId"
                                 value={this.state.customerId}
-                                onChange={this.OnInputChange}
+                                onChange={this.OnCustomerChange}
                               />
                               {/* <select
                                 required
@@ -495,7 +493,7 @@ export default class EngineeringRequestForm extends React.Component {
                           </div>
                         </div>
 
-                        {/* <div class="form-group col-md-6">
+                        <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
                               <label>
@@ -505,7 +503,7 @@ export default class EngineeringRequestForm extends React.Component {
                             </div>
                             <div class="col-md-7">
                               <input
-                                required={true}
+                                readOnly={true}
                                 type="text"
                                 placeholder="Alias"
                                 class="form-control"
@@ -515,7 +513,7 @@ export default class EngineeringRequestForm extends React.Component {
                               />
                             </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
 
                       <div class="row">
