@@ -331,7 +331,7 @@ export default class EngineeringRequest extends React.Component {
                           {!this.state.crmId && !this.state.isAddingToCrm && (
                             <span class="form-control">Not added to CRM</span>
                           )}
-                          {!this.state.crmId && this.state.isAddingToCrm && (
+                          {this.state.isAddingToCrm && (
                             <span class="form-control">
                               Submitting request, wait...
                             </span>
