@@ -328,8 +328,13 @@ export default class EngineeringRequest extends React.Component {
                           {this.state.crmId && (
                             <span class="form-control">{this.state.crmId}</span>
                           )}
-                          {!this.state.crmId && (
+                          {!this.state.crmId && !this.state.isAddingToCrm && (
                             <span class="form-control">Not added to CRM</span>
+                          )}
+                          {!this.state.crmId && this.state.isAddingToCrm && (
+                            <span class="form-control">
+                              Submitting request, wait...
+                            </span>
                           )}
                           <div class="input-group-append">
                             <button
