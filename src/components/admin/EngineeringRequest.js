@@ -17,6 +17,7 @@ export default class EngineeringRequest extends React.Component {
       shipmentType: "",
       url: "",
       requestBy: "",
+      isAddingToCrm: false,
       // form fields
       userId: "",
       msftAlias: "",
@@ -56,6 +57,9 @@ export default class EngineeringRequest extends React.Component {
 
   AddToCrm(event) {
     event.preventDefault();
+    this.setState({
+      isAddingToCrm: true,
+    });
 
     axios
       .get(`${services.baseUrl}${services.addEngineeringRequestToCrm}`, {
@@ -67,6 +71,7 @@ export default class EngineeringRequest extends React.Component {
       .then((response) => {
         this.setState({
           crmId: response.data.data,
+          isAddingToCrm: false,
         });
         alert(response.data.message);
       });
@@ -331,6 +336,7 @@ export default class EngineeringRequest extends React.Component {
                               type="button"
                               className="btn btn-secondary"
                               onClick={this.AddToCrm}
+                              disabled={this.state.isAddingToCrm}
                             >
                               Add To CRM
                             </button>
