@@ -325,7 +325,7 @@ export default class EngineeringRequest extends React.Component {
                       </div>
                       <div class="col-md-8">
                         <div class="input-group">
-                          {this.state.crmId && (
+                          {this.state.crmId && !this.state.isAddingToCrm && (
                             <span class="form-control">{this.state.crmId}</span>
                           )}
                           {!this.state.crmId && !this.state.isAddingToCrm && (
