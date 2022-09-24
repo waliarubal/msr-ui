@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { services } from "../common/constant";
-import { formatDate, getToken, getUserId } from "../common/helpers";
+import { formatDate, getToken, isAdmin } from "../common/helpers";
 import { Link } from "react-router-dom";
 
 export default class EngineeringRequests extends React.Component {
@@ -12,6 +12,7 @@ export default class EngineeringRequests extends React.Component {
       requests: [],
       statuses: [],
       isReload: false,
+      isAdmin: isAdmin()
     };
     this.GetRequests = this.GetRequests.bind(this);
   }
@@ -102,6 +103,7 @@ export default class EngineeringRequests extends React.Component {
                         <thead class="thead-light">
                           <tr>
                             <th>Draft</th>
+                            {isAdmin && <th>CRM Status</th>}
                             <th>Project</th>
                             <th>Submitted</th>
                             <th>Desired Due Date</th>
@@ -116,6 +118,7 @@ export default class EngineeringRequests extends React.Component {
                             this.state.requests.map((request) => (
                               <tr key={request._id}>
                                 <td>{request.isDraft ? "Yes" : "No"}</td>
+                                {isAdmin && <td>{request.crmId ? "Submitted" : "Not Yet Submitted"}</td>}
                                 <td>
                                   <Link
                                     to={`/engineering-request/${request._id}`}
