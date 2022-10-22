@@ -454,7 +454,7 @@ export default class EngineeringRequestForm extends React.Component {
                         </div>
                       </div>
 
-                      <div class="row">
+                      <div class="row" style={{display: "none"}}>
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">

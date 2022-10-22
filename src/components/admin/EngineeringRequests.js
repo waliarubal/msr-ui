@@ -12,7 +12,7 @@ export default class EngineeringRequests extends React.Component {
       requests: [],
       statuses: [],
       isReload: false,
-      isAdmin: isAdmin()
+      isAdmin: isAdmin(),
     };
     this.GetRequests = this.GetRequests.bind(this);
   }
@@ -109,7 +109,7 @@ export default class EngineeringRequests extends React.Component {
                             <th>Desired Due Date</th>
                             <th>Priority</th>
                             <th>Submitted By</th>
-                            <th>Customer Email</th>
+                            {/* <th>Customer Email</th> */}
                             <th></th>
                           </tr>
                         </thead>
@@ -118,7 +118,13 @@ export default class EngineeringRequests extends React.Component {
                             this.state.requests.map((request) => (
                               <tr key={request._id}>
                                 <td>{request.isDraft ? "Yes" : "No"}</td>
-                                {isAdmin && <td>{request.crmId ? "Submitted" : "Not Yet Submitted"}</td>}
+                                {isAdmin && (
+                                  <td>
+                                    {request.crmId
+                                      ? "Submitted"
+                                      : "Not Yet Submitted"}
+                                  </td>
+                                )}
                                 <td>
                                   <Link
                                     to={`/engineering-request/${request._id}`}
@@ -157,9 +163,9 @@ export default class EngineeringRequests extends React.Component {
                                       ))}
                                   </select>
                                 </td>
-                                <td>
-                                  {request.customerId}
-                                  {/* <select
+                                {/* <td>
+                                  {request.customerId} */}
+                                {/* <select
                                     disabled
                                     class="form-control form-control-sm"
                                     value={request.customerId}
@@ -172,7 +178,7 @@ export default class EngineeringRequests extends React.Component {
                                         </option>
                                       ))}
                                   </select> */}
-                                </td>
+                                {/* </td> */}
                                 <td>
                                   <button
                                     className="btn btn-danger btn-sm"
