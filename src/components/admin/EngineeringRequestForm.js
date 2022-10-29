@@ -111,8 +111,8 @@ export default class EngineeringRequestForm extends React.Component {
       dueDate: null,
       userId: getUserId(),
       msftAlias: getUserAlias(),
-      customerId: getUserEmail(), //getUserId(),
-      customerMsftAlias: getUserAlias(),
+      customerId: "", // getUserEmail() //getUserId(),
+      customerMsftAlias: "", //getUserAlias()
       requestDescription: "",
       priority: 2,
       projectName: "",
@@ -454,7 +454,7 @@ export default class EngineeringRequestForm extends React.Component {
                         </div>
                       </div>
 
-                      <div class="row" style={{display: "none"}}>
+                      <div class="row" style={{ display: "none" }}>
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
@@ -464,7 +464,7 @@ export default class EngineeringRequestForm extends React.Component {
                             </div>
                             <div class="col-md-7">
                               <input
-                                required={true}
+                                required={false}
                                 type="text"
                                 placeholder="Alias"
                                 class="form-control"

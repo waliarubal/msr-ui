@@ -404,7 +404,7 @@ export default class EngineeringRequest extends React.Component {
                   <div class="row">
                     <div class="col-md-4">
                       <label>
-                        {this.state.crmId && "CRM "}Customer Email
+                        CRM Customer Email
                         <span class="required">*</span>:
                       </label>
                     </div>
@@ -440,9 +440,7 @@ export default class EngineeringRequest extends React.Component {
                 <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
-                      <label>
-                        {this.state.crmId && "CRM "}Customer MSFT Alias:
-                      </label>
+                      <label>CRM Customer MSFT Alias:</label>
                     </div>
                     <div class="col-md-8">
                       <input
