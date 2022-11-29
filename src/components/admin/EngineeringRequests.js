@@ -103,13 +103,13 @@ export default class EngineeringRequests extends React.Component {
                         <thead class="thead-light">
                           <tr>
                             <th>Draft</th>
+                            <th>Submitted On</th>
                             {isAdmin && <th>CRM Status</th>}
+                            <th>Requester's Email</th>
+                            <th>Submitter's Email</th>
+                            <th>Description</th>
                             <th>Project</th>
-                            <th>Submitted</th>
                             <th>Desired Due Date</th>
-                            <th>Priority</th>
-                            <th>Submitted By</th>
-                            {/* <th>Customer Email</th> */}
                             <th></th>
                           </tr>
                         </thead>
@@ -118,6 +118,7 @@ export default class EngineeringRequests extends React.Component {
                             this.state.requests.map((request) => (
                               <tr key={request._id}>
                                 <td>{request.isDraft ? "Yes" : "No"}</td>
+                                <td>{request.submittedOn}</td>
                                 {isAdmin && (
                                   <td>
                                     {request.crmId
@@ -125,29 +126,7 @@ export default class EngineeringRequests extends React.Component {
                                       : "Not Yet Submitted"}
                                   </td>
                                 )}
-                                <td>
-                                  <Link
-                                    to={`/engineering-request/${request._id}`}
-                                  >
-                                    {request.projectName}
-                                  </Link>
-                                </td>
-                                <td>{formatDate(request.createdAt)}</td>
-                                <td>
-                                  {formatDate(request.requestedCompletionDate)}
-                                </td>
-                                <td>
-                                  <select
-                                    disabled
-                                    class="form-control form-control-sm"
-                                    value={request.priority}
-                                  >
-                                    <option value={4}>Critical</option>
-                                    <option value={1}>High</option>
-                                    <option value={2}>Normal</option>
-                                    <option value={3}>Low</option>
-                                  </select>
-                                </td>
+                                <td>{request.requesterEmail}</td>
                                 <td>
                                   <select
                                     disabled
@@ -158,27 +137,22 @@ export default class EngineeringRequests extends React.Component {
                                     {this.state.users &&
                                       this.state.users.map((user) => (
                                         <option value={user._id} key={user._id}>
-                                          {user.firstname}
+                                          {user.email}
                                         </option>
                                       ))}
                                   </select>
                                 </td>
-                                {/* <td>
-                                  {request.customerId} */}
-                                {/* <select
-                                    disabled
-                                    class="form-control form-control-sm"
-                                    value={request.customerId}
+                                <td>{request.requestDescription}</td>
+                                <td>
+                                  <Link
+                                    to={`/engineering-request/${request._id}`}
                                   >
-                                    <option>--Select--</option>
-                                    {this.state.users &&
-                                      this.state.users.map((user) => (
-                                        <option value={user._id} key={user._id}>
-                                          {user.firstname}
-                                        </option>
-                                      ))}
-                                  </select> */}
-                                {/* </td> */}
+                                    {request.projectName}
+                                  </Link>
+                                </td>
+                                <td>
+                                  {formatDate(request.requestedCompletionDate)}
+                                </td>
                                 <td>
                                   <button
                                     className="btn btn-danger btn-sm"

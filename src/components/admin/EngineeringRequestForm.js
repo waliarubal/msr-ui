@@ -7,6 +7,7 @@ import {
   getUserAlias,
   getUserEmail,
   getUserId,
+  getPstTimeString,
 } from "../common/helpers";
 import DateTimePicker from "react-datetime-picker";
 import Autocomplete from "react-autocomplete";
@@ -119,6 +120,8 @@ export default class EngineeringRequestForm extends React.Component {
       successCriteria: "",
       files: [],
       isDraft: false,
+      submittedOn: getPstTimeString(),
+      requesterEmail: getUserEmail(),
     };
 
     this.OnInputChange = this.OnInputChange.bind(this);
@@ -225,6 +228,8 @@ export default class EngineeringRequestForm extends React.Component {
       successCriteria: "",
       files: [],
       isDraft: false,
+      submittedOn: getPstTimeString(),
+      requesterEmail: getUserEmail(),
     });
   }
 
@@ -265,6 +270,8 @@ export default class EngineeringRequestForm extends React.Component {
           successCriteria: this.state.successCriteria,
           files: this.state.files,
           isDraft: this.state.isDraft,
+          submittedOn: this.state.submittedOn,
+          requesterEmail: this.state.requesterEmail,
         }
       )
       .then((response) => {
@@ -372,37 +379,85 @@ export default class EngineeringRequestForm extends React.Component {
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label>Desired Due Date:</label>
+                              <label>Current Time (Redmond, WA):</label>
                             </div>
                             <div class="col-md-7">
-                              <DateTimePicker
-                                format="MM-dd-y HH:mm"
-                                name="dueDate"
-                                value={this.state.dueDate}
-                                onChange={(date) =>
-                                  this.setState({ dueDate: date })
-                                }
+                              <input
+                                type="text"
+                                readOnly
+                                value={this.state.submittedOn}
+                                className="form-control"
+                              ></input>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div class="form-group col-md-6">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>
+                                Requester's Microsoft Email
+                                <span class="required">*</span>:
+                              </label>
+                            </div>
+                            <div class="col-md-7">
+                              <input
+                                required={true}
+                                type="email"
+                                placeholder="Email Address"
+                                class="form-control"
+                                name="requesterEmail"
+                                value={this.state.requesterEmail}
+                                onChange={this.OnInputChange}
                               />
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      <div class="row hide">
                         <div class="form-group col-md-6">
                           <div class="row">
                             <div class="col-md-5">
-                              <label class="text-left">Priority:</label>
+                              <label>
+                                Customer's Microsoft Email
+                                <span class="required">*</span>:
+                              </label>
                             </div>
                             <div class="col-md-7">
-                              <select
-                                name="priority"
+                              <input
+                                required={false}
+                                type="email"
+                                placeholder="Email Address"
                                 class="form-control"
-                                value={this.state.priority}
+                                name="customerId"
+                                value={this.state.customerId}
+                                onChange={this.OnCustomerChange}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>
+                                Customer's MSFT Alias
+                                <span class="required">*</span>:
+                              </label>
+                            </div>
+                            <div class="col-md-7">
+                              <input
+                                readOnly={true}
+                                type="text"
+                                placeholder="Alias"
+                                class="form-control"
+                                name="customerMsftAlias"
+                                value={this.state.customerMsftAlias}
                                 onChange={this.OnInputChange}
-                              >
-                                <option value={4}>Critical</option>
-                                <option value={1}>High</option>
-                                <option value={2}>Normal</option>
-                                <option value={3}>Low</option>
-                              </select>
+                              />
                             </div>
                           </div>
                         </div>
@@ -413,7 +468,8 @@ export default class EngineeringRequestForm extends React.Component {
                           <div class="row">
                             <div class="col-md-5">
                               <label>
-                                Submitted By<span class="required">*</span> :
+                                Submitter's Microsoft Email
+                                <span class="required">*</span> :
                               </label>
                             </div>
                             <div class="col-md-7">
@@ -426,7 +482,7 @@ export default class EngineeringRequestForm extends React.Component {
                                 {this.state.users &&
                                   this.state.users.map((user) => (
                                     <option value={user._id} key={user._id}>
-                                      {user.firstname}
+                                      {user.email}
                                     </option>
                                   ))}
                               </select>
@@ -434,7 +490,7 @@ export default class EngineeringRequestForm extends React.Component {
                           </div>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 hide">
                           <div class="row">
                             <div class="col-md-5">
                               <label>MSFT Alias:</label>
@@ -447,68 +503,6 @@ export default class EngineeringRequestForm extends React.Component {
                                 class="form-control"
                                 name="msftAlias"
                                 value={this.state.msftAlias}
-                                onChange={this.OnInputChange}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row" style={{ display: "none" }}>
-                        <div class="form-group col-md-6">
-                          <div class="row">
-                            <div class="col-md-5">
-                              <label>
-                                Customer Email<span class="required">*</span>:
-                              </label>
-                            </div>
-                            <div class="col-md-7">
-                              <input
-                                required={false}
-                                type="text"
-                                placeholder="Alias"
-                                class="form-control"
-                                name="customerId"
-                                value={this.state.customerId}
-                                onChange={this.OnCustomerChange}
-                              />
-                              {/* <select
-                                required
-                                name="customerId"
-                                onChange={this.OnCustomerChange}
-                                class="form-control form-control-sm"
-                                value={this.state.customerId}
-                              >
-                                <option>--Select--</option>
-                                {this.state.users &&
-                                  this.state.users.map((user) => (
-                                    <option value={user._id} key={user._id}>
-                                      {user.firstname}
-                                    </option>
-                                  ))}
-                              </select> */}
-                              {/* https://github.com/reactjs/react-autocomplete */}
-                              {/* <Autocomplete /> */}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                          <div class="row">
-                            <div class="col-md-5">
-                              <label>
-                                Customer MSFT Alias
-                                <span class="required">*</span>:
-                              </label>
-                            </div>
-                            <div class="col-md-7">
-                              <input
-                                readOnly={true}
-                                type="text"
-                                placeholder="Alias"
-                                class="form-control"
-                                name="customerMsftAlias"
-                                value={this.state.customerMsftAlias}
                                 onChange={this.OnInputChange}
                               />
                             </div>
@@ -534,6 +528,46 @@ export default class EngineeringRequestForm extends React.Component {
                                 value={this.state.projectName}
                                 onChange={this.OnInputChange}
                               />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>Desired Due Date:</label>
+                            </div>
+                            <div class="col-md-7">
+                              <DateTimePicker
+                                format="MM-dd-y HH:mm"
+                                name="dueDate"
+                                value={this.state.dueDate}
+                                onChange={(date) =>
+                                  this.setState({ dueDate: date })
+                                }
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-6 hide">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label class="text-left">Priority:</label>
+                            </div>
+                            <div class="col-md-7">
+                              <select
+                                name="priority"
+                                class="form-control"
+                                value={this.state.priority}
+                                onChange={this.OnInputChange}
+                              >
+                                <option value={4}>Critical</option>
+                                <option value={1}>High</option>
+                                <option value={2}>Normal</option>
+                                <option value={3}>Low</option>
+                              </select>
                             </div>
                           </div>
                         </div>

@@ -40,6 +40,7 @@ export default class EngineeringRequest extends React.Component {
       projectContact: "",
       techContact: "",
       crmId: "",
+      requesterEmail: ""
     };
 
     this.OnInputChange = this.OnInputChange.bind(this);
@@ -156,6 +157,7 @@ export default class EngineeringRequest extends React.Component {
                           techContact: record.techContact,
                           successCriteria: record.successCriteria,
                           crmId: record.crmId,
+                          requesterEmail: record.requesterEmail
                         });
                       });
                   });
@@ -199,6 +201,7 @@ export default class EngineeringRequest extends React.Component {
           files: this.state.files,
           isDraft: this.state.isDraft,
           crmId: this.state.crmId,
+          requesterEmail: this.state.requesterEmail
         }
       )
       .then((response) => {
@@ -353,12 +356,36 @@ export default class EngineeringRequest extends React.Component {
                 )}
               </div>
 
+              <div className="row">
+              <div class="form-group col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>
+                        Requester's Microsoft Email
+                        <span class="required">*</span>:
+                      </label>
+                    </div>
+                    <div class="col-md-8">
+                      <input
+                        required
+                        type="text"
+                        placeholder="Alias"
+                        class="form-control"
+                        name="customerId"
+                        value={this.state.requesterEmail}
+                        onChange={this.OnInputChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="row">
                 <div class="form-group col-md-6">
                   <div class="row">
                     <div class="col-md-4">
                       <label>
-                        Submitted By<span class="required">*</span>:
+                        Submitter's Microsoft Email<span class="required">*</span>:
                       </label>
                     </div>
                     <div class="col-md-8">
@@ -371,7 +398,7 @@ export default class EngineeringRequest extends React.Component {
                         {this.state.users &&
                           this.state.users.map((user) => (
                             <option value={user._id} key={user._id}>
-                              {user.firstname}
+                              {user.email}
                             </option>
                           ))}
                       </select>
@@ -379,7 +406,7 @@ export default class EngineeringRequest extends React.Component {
                   </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 hide">
                   <div class="row">
                     <div class="col-md-4">
                       <label>MSFT Alias:</label>
@@ -404,7 +431,7 @@ export default class EngineeringRequest extends React.Component {
                   <div class="row">
                     <div class="col-md-4">
                       <label>
-                        CRM Customer Email
+                        HWLab FTE Customer Email
                         <span class="required">*</span>:
                       </label>
                     </div>
@@ -418,26 +445,11 @@ export default class EngineeringRequest extends React.Component {
                         value={this.state.customerId}
                         onChange={this.OnCustomerChange}
                       />
-                      {/* <select
-                        required
-                        name="customerId"
-                        class="form-control form-control-sm"
-                        onChange={this.OnCustomerChange}
-                        value={this.state.customerId}
-                      >
-                        <option>--Select--</option>
-                        {this.state.users &&
-                          this.state.users.map((user) => (
-                            <option value={user._id} key={user._id}>
-                              {user.firstname}
-                            </option>
-                          ))}
-                      </select> */}
                     </div>
                   </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 hide">
                   <div class="row">
                     <div class="col-md-4">
                       <label>CRM Customer MSFT Alias:</label>

@@ -119,3 +119,7 @@ input[type="file"] {
 .carousel-slider {
   position: relative;
 }
+
+.hide {
+  display: none !important;
+}

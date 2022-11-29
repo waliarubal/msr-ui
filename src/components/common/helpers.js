@@ -27,7 +27,7 @@ function getUserAlias() {
 }
 
 function getAliasFromEmail(email) {
-  if (!email) return '';
+  if (!email) return "";
 
   return email.substring(0, email.lastIndexOf("@"));
 }
@@ -49,6 +49,21 @@ function formatDate(dateString) {
   return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
 }
 
+function getPstTimeString() {
+  const date = new Date();
+
+  const pst = date.toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return pst;
+}
+
 module.exports = {
   getToken,
   getUserId,
@@ -57,5 +72,6 @@ module.exports = {
   isAdmin,
   getUserAlias,
   getAliasFromEmail,
-  getUserEmail
+  getUserEmail,
+  getPstTimeString,
 };
